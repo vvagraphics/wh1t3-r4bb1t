@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Markdown
 
-## Getting Started
+# wh1t3-r4bb1t 🐇
 
-First, run the development server:
+A modular, interactive study and resource platform engineered for cybersecurity certifications. Built to bridge the gap between theoretical rote memorization and practical application for exams like CompTIA Network+, Security+, CySA+, and advanced tracks.
 
-```bash
+---
+
+## ⚡ Core Features
+
+- **Spaced-Repetition Flashcards:** Anki-style active recall decks tailored to exam objectives, acronyms, protocols, and port numbers.
+- **Interactive PBQs & Match Labs:** Performance-Based Question (PBQ) simulations, drag-and-drop protocol matching, network topology puzzles, and log analysis exercises.
+- **Curated Media Hub:** Direct links and embedded tutorials, video breakdowns, and community walk-throughs.
+- **Reference Vault & Cheat Sheets:** High-yield PDF references, subnetting tables, CLI syntax guides, and architectural diagrams.
+
+---
+
+## 🎯 Target Certifications
+
+- [x] **CompTIA Network+ (N10-008 / N10-009)**
+- [x] **CompTIA Security+ (SY0-701)**
+- [x] **CompTIA CySA+ (CS0-003)**
+- [ ] _Future Tracks: PenTest+, CASP+ / SecurityX, Linux+, BTL1_
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** [e.g., React / Next.js / TypeScript / Tailwind CSS]
+- **State & Storage:** [e.g., LocalStorage / IndexedDB / Supabase]
+- **Deployment:** [e.g., Vercel / GitHub Pages]
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm, pnpm, or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/your-username/wh1t3-r4bb1t.git](https://github.com/your-username/wh1t3-r4bb1t.git)
+   cd wh1t3-r4bb1t
+   Install dependencies:
+   ```
+
+Bash
+npm install
+Run the development server:
+
+Bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 (or specified port) in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🗺️ Roadmap
+[ ] Add interactive CIDR/subnetting calculator lab
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[ ] Export/import decks via JSON / Anki .apkg format
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[ ] Offline caching support (PWA)
 
-## Learn More
+[ ] Dark/Hacker terminal UI theme toggles
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📄 License
+Distributed under the MIT License. See LICENSE for more information.
+# wh1t3-r4bb1t
