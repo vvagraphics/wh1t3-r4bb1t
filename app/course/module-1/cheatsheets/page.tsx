@@ -1,0 +1,1 @@
+<img src="/media/my-infographic.jpg" alt="Cheatsheet" />

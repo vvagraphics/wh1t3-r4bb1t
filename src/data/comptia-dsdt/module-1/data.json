@@ -1,0 +1,60 @@
+[
+  {
+    "id": "m1-01",
+    "category": "Core Networking Models",
+    "topic": "OSI 7-Layer Model",
+    "question": "What are the 7 layers of the OSI model from Layer 7 down to Layer 1?",
+    "answer": "Layer 7: Application, Layer 6: Presentation, Layer 5: Session, Layer 4: Transport, Layer 3: Network, Layer 2: Data Link, Layer 1: Physical.",
+    "laymanExplanation": "Think of it like an international mail service: You write a letter (App), translate/encrypt it into an envelope (Presentation), confirm the recipient is listening (Session), hire a delivery truck with tracking (Transport), slap the street address on it (Network), seal it inside the neighborhood dispatch pouch with postal barcodes (Data Link), and move the actual physical paper along the road (Physical).",
+    "mnemonic": "All People Seem To Need Data Processing (7 to 1) OR Please Do Not Throw Sausage Pizza Away (1 to 7)"
+  },
+  {
+    "id": "m1-02",
+    "category": "Core Networking Models",
+    "topic": "PDUs (Protocol Data Units)",
+    "question": "What is the Protocol Data Unit (PDU) at each layer of the OSI model?",
+    "answer": "Layers 7–5: Data (or Payload) | Layer 4: Segment (TCP) or Datagram (UDP) | Layer 3: Packet | Layer 2: Frame | Layer 1: Bits.",
+    "laymanExplanation": "As information goes down the stack, it gets wrapped in different packing materials. A box of raw goods (Data) gets packed into shipping crates (Segments), assigned an international shipping label with IP addresses (Packets), placed inside local delivery containers with MAC addresses and a safety seal (Frames), and finally transmitted as electric pulses, light flashes, or radio waves (Bits).",
+    "mnemonic": "Don't Some People Fly By? (Data, Segment, Packet, Frame, Bits)"
+  },
+  {
+    "id": "m1-03",
+    "category": "Core Networking Models",
+    "topic": "Encapsulation vs. Decapsulation",
+    "question": "What is the difference between Encapsulation and Decapsulation?",
+    "answer": "Encapsulation occurs when sending data down the stack (adding headers/trailers at each layer). Decapsulation occurs when receiving data up the stack (stripping headers layer by layer to access raw data).",
+    "laymanExplanation": "Encapsulation is like nesting Russian dolls inside each other before sending. Decapsulation is the recipient opening each doll layer until they reach the surprise inside."
+  },
+  {
+    "id": "m1-04",
+    "category": "Core Networking Models",
+    "topic": "TCP/IP vs. OSI Model Mapping",
+    "question": "How do the 4 layers of the TCP/IP model map to the 7 layers of the OSI model?",
+    "answer": "TCP/IP Application Layer = OSI Layers 7, 6, 5 (Application, Presentation, Session). TCP/IP Transport = OSI Layer 4. TCP/IP Internet = OSI Layer 3. TCP/IP Network Access (Link) = OSI Layers 2 & 1 (Data Link & Physical).",
+    "laymanExplanation": "The OSI model is the theoretical blueprint with 7 distinct steps; the TCP/IP model is what the real internet actually uses by combining the top three layers into one and the bottom two layers into one."
+  },
+  {
+    "id": "m1-05",
+    "category": "Core Networking Models",
+    "topic": "Network Traffic Transmission Types",
+    "question": "What are the four primary network transmission methods: Unicast, Broadcast, Multicast, and Anycast?",
+    "answer": "Unicast: 1-to-1 communication (e.g., standard web browsing). Broadcast: 1-to-All communication on a local subnet (e.g., ARP requests). Multicast: 1-to-Many subscribed recipients (e.g., live video stream). Anycast: 1-to-Nearest destination sharing the same IP (e.g., root DNS routing).",
+    "laymanExplanation": "Unicast is a direct private phone call. Broadcast is yelling through a megaphone in a crowded cafeteria. Multicast is a group radio channel where only people tuned into that channel hear you. Anycast is dialing 911—your call automatically routes to the closest physical dispatch center."
+  },
+  {
+    "id": "m1-06",
+    "category": "Safety & Operations",
+    "topic": "Electrostatic Discharge (ESD)",
+    "question": "What causes ESD, and what are the best practices for preventing it in a network environment?",
+    "answer": "ESD is caused by friction and low humidity (dry air). Prevention: Wear anti-static wrist straps attached to bare unpainted metal chassis, work on grounded anti-static mats, maintain 40%–60% humidity in server rooms, and store loose hardware in anti-static ESD shielding bags.",
+    "laymanExplanation": "You walking on carpet in winter and zapping a doorknob is harmless to you, but even a tiny zap you can't feel can fry microchips. Anti-static gear drains that buildup safely into the earth."
+  },
+  {
+    "id": "m1-07",
+    "category": "Safety & Operations",
+    "topic": "Rack & Physical Hardware Safety",
+    "question": "What physical safety guidelines must be observed when working in server rooms and racks?",
+    "answer": "Always load the heaviest equipment (like UPS battery backups and large SAN storage arrays) at the very bottom of the rack to prevent tipping; use team lifts/carts for anything over 50 lbs; maintain cable bundling/labeling to avoid trip and snag hazards; and keep liquids away from all electrical gear.",
+    "laymanExplanation": "Think of a server rack like a bookcase—if you put all the heavy encyclopedias on the top shelf, the whole thing will tip over on you. Heavy power bricks always stay at the base."
+  }
+]

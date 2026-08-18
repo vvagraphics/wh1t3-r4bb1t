@@ -1,0 +1,416 @@
+[
+  {
+    "id": "NET-01",
+    "category": "Network Models",
+    "topic": "TCP/IP Model Architecture",
+    "question": "What are the four layers of the standard TCP/IP model from top to bottom?",
+    "answer": "Application, Transport, Internet, and Network Access[cite: 22, 24, 25].",
+    "laymanExplanation": "Think of it like a corporate command chain: The CEO (Application) writes a message, the Department Manager (Transport) organizes and chunks it, the Mailroom (Internet) stamps the destination address on it, and the Courier (Network Access) physically drives it across town.",
+    "examTip": "Use the acronym ATIN (Application, Transport, Internet, Network Access). Do not confuse this with the 7-layer OSI model."
+  },
+  {
+    "id": "NET-02",
+    "category": "Network Models",
+    "topic": "TCP/IP Application Layer",
+    "question": "What is the primary role and associated Protocol Data Unit (PDU) of the TCP/IP Application Layer?",
+    "answer": "It provides user-facing services, protocols, and interface interaction; its PDU is Data.",
+    "laymanExplanation": "This is the software interface you interact with (like a web browser or email client). The 'Data' is the actual file, webpage, or text message before any transport formatting occurs.",
+    "examTip": "The TCP/IP Application layer condenses the OSI Application (L7), Presentation (L6), and Session (L5) layers into a single layer."
+  },
+  {
+    "id": "NET-03",
+    "category": "Network Models",
+    "topic": "TCP/IP Transport Layer",
+    "question": "What functions are handled by the TCP/IP Transport Layer, and what are its PDUs?",
+    "answer": "It manages end-to-end delivery, reliability, flow control, and segmentation[cite: 126]; its PDUs are Segments (when using TCP) and Datagrams (when using UDP).",
+    "laymanExplanation": "This is the packaging facility. It splits a massive payload into numbered pieces (segments) so they fit down the wire and can be reassembled in the right order.",
+    "examTip": "Whenever an exam question mentions 'flow control', 'segmentation', 'reliability', or 'port numbers', point to the Transport layer[cite: 126]."
+  },
+  {
+    "id": "NET-04",
+    "category": "Network Models",
+    "topic": "TCP/IP Internet Layer",
+    "question": "What core responsibilities and PDU define the TCP/IP Internet Layer?",
+    "answer": "It handles logical addressing and routing across networks; its PDU is the Packet.",
+    "laymanExplanation": "This is the global postal routing hub. It reads logical addresses (IP addresses) and chooses the best path across routers worldwide to reach the destination network.",
+    "examTip": "Routers operate at this layer. IP, ICMP, and ARP operate at or alongside this layer in the TCP/IP stack."
+  },
+  {
+    "id": "NET-05",
+    "category": "Network Models",
+    "topic": "TCP/IP Network Access Layer",
+    "question": "What is the function and PDU of the TCP/IP Network Access Layer?",
+    "answer": "It manages physical signaling, media access control, and framing; its PDUs are Frames (at the link level) and Bits (at the physical level).",
+    "laymanExplanation": "This is the actual road and truck. It converts digital 1s and 0s into physical electrical pulses, light flashes, or radio waves and ensures local hops between physical devices succeed.",
+    "examTip": "This layer corresponds to the OSI Physical (L1) and Data Link (L2) layers combined. MAC addresses live here."
+  },
+  {
+    "id": "NET-06",
+    "category": "Encapsulation & Data Flow",
+    "topic": "PDU Encapsulation Sequence",
+    "question": "What is the exact sequence of data units (PDUs) during encapsulation from top to bottom?",
+    "answer": "Data → Segment → Packet → Frame → Bits[cite: 130, 132].",
+    "laymanExplanation": "You start with raw content (Data), wrap it into a numbered shipping box (Segment), put a destination routing label on it (Packet), place it in a local delivery vehicle (Frame), and transmit it as raw energy pulses (Bits).",
+    "examTip": "Mnemonic: Don't Some People Fear Bats (Data, Segment, Packet, Frame, Bits)."
+  },
+  {
+    "id": "NET-07",
+    "category": "Encapsulation & Data Flow",
+    "topic": "The Encapsulation Process",
+    "question": "What occurs to data during the encapsulation process as it moves down the network stack?",
+    "answer": "Protocol headers (and trailers where applicable, such as the FCS trailer at L2) are appended to the payload at each descending layer[cite: 30, 32].",
+    "laymanExplanation": "Think of nesting Russian dolls or nesting envelopes. Every department adds its own outer envelope with specific instructions before passing it down.",
+    "examTip": "Encapsulation happens on the sender side. Headers are added going down; trailers (FCS) are typically added at Layer 2."
+  },
+  {
+    "id": "NET-08",
+    "category": "Encapsulation & Data Flow",
+    "topic": "The Decapsulation Process",
+    "question": "What process removes protocol headers as data travels up the protocol stack at the receiving host?",
+    "answer": "Decapsulation[cite: 48, 50].",
+    "laymanExplanation": "The receiving computer opens each outer envelope one by one, strips off the routing and transport metadata, and delivers the clean application payload to the target software.",
+    "examTip": "Decapsulation happens at the receiver side as data travels UP the stack from Physical to Application."
+  },
+  {
+    "id": "NET-09",
+    "category": "Network Models",
+    "topic": "OSI vs. TCP/IP Models",
+    "question": "What is the structural and conceptual relationship between the OSI and TCP/IP models?",
+    "answer": "The TCP/IP model is a practical protocol suite implemented across the internet, while the OSI model is a theoretical 7-layer architectural framework used for standardizing network communication and teaching[cite: 54, 56].",
+    "laymanExplanation": "OSI is the theoretical textbook engineering standard; TCP/IP is the actual real-world engine running inside every connected device.",
+    "examTip": "OSI has 7 layers (Physical to Application). TCP/IP has 4 layers (Network Access to Application)."
+  },
+  {
+    "id": "NET-10",
+    "category": "Troubleshooting",
+    "topic": "Layered Troubleshooting Methodology",
+    "question": "Why are layered network models advantageous when diagnosing and resolving network issues?",
+    "answer": "They provide a structured, systematic framework to isolate faults to specific hardware, protocol, or software layers[cite: 104, 106].",
+    "laymanExplanation": "Instead of guessing, you test methodically: verify physical link lights (L1), check local switch connectivity (L2), verify IP ping/routing (L3), verify port availability (L4), and check the software configuration (L7).",
+    "examTip": "Common exam troubleshooting approaches include Bottom-Up (L1 to L7), Top-Down (L7 to L1), and Divide-and-Conquer (starting at L3/ping)."
+  },
+  {
+    "id": "NET-11",
+    "category": "Traffic Types",
+    "topic": "Unicast Traffic",
+    "question": "What characterizes unicast network communication?",
+    "answer": "Traffic sent from one single sender directly to one single specific receiver[cite: 72, 74].",
+    "laymanExplanation": "A private phone call between two individuals. Only the designated recipient receives and processes the data.",
+    "examTip": "Unicast uses a unique destination MAC/IP address. It is the most common traffic type on the internet."
+  },
+  {
+    "id": "NET-12",
+    "category": "Traffic Types",
+    "topic": "Broadcast Traffic",
+    "question": "Where is a broadcast transmission delivered, and how do network devices handle it?",
+    "answer": "It is delivered to all active hosts residing within the same broadcast domain[cite: 14, 17]. Routers do not forward Layer 2/3 broadcasts across network boundaries by default.",
+    "laymanExplanation": "Shouting through a megaphone in an enclosed auditorium. Everyone in the room must listen to the message, but people outside the building (past the router) do not hear it.",
+    "examTip": "Layer 2 Broadcast MAC = FF:FF:FF:FF:FF:FF. Layer 3 IPv4 Broadcast = 255.255.255.255 (or subnet broadcast address)."
+  },
+  {
+    "id": "NET-13",
+    "category": "Traffic Types",
+    "topic": "Multicast Traffic",
+    "question": "Why is multicast more efficient than broadcast for one-to-many communications?",
+    "answer": "Multicast delivers data only to interested nodes that have explicitly subscribed to or joined a specific multicast group[cite: 78, 81].",
+    "laymanExplanation": "Like a TV or radio station broadcast. The stream exists, but only devices tuned into that exact channel process the data, saving bandwidth across all other devices.",
+    "examTip": "IPv4 Multicast address range: 224.0.0.0 through 239.255.255.255 (Class D). IPv6 Multicast begins with the prefix ff00::/8."
+  },
+  {
+    "id": "NET-14",
+    "category": "Traffic Types",
+    "topic": "Anycast Traffic",
+    "question": "What is anycast routing and how does it deliver traffic?",
+    "answer": "Anycast routes traffic to the single topologically nearest device among a group of servers sharing the exact same IP address.",
+    "laymanExplanation": "Calling an emergency dispatch number. You dial one common number, but your call is automatically routed to the call center physically and topologically closest to you.",
+    "examTip": "Anycast is widely used in global DNS root servers and Content Delivery Networks (CDNs) for speed and redundancy."
+  },
+  {
+    "id": "NET-15",
+    "category": "Safety & Operations",
+    "topic": "Electrical Safety & LOTO",
+    "question": "What is the primary procedure for eliminating electrical injury risk during server rack maintenance?",
+    "answer": "De-energize the equipment and apply lockout/tagout (LOTO) protocols to ensure the power source remains disconnected[cite: 7, 10].",
+    "laymanExplanation": "Shut down the power breaker and put a padlock and warning tag on the switch so no one can restore power while you are working inside the equipment.",
+    "examTip": "Look for 'Lockout/Tagout' or 'LOTO' whenever electrical isolation and physical safety are tested[cite: 10]."
+  },
+  {
+    "id": "NET-16",
+    "category": "Safety & Operations",
+    "topic": "Electrostatic Discharge (ESD)",
+    "question": "What is the purpose of an ESD wrist strap and when should it be avoided?",
+    "answer": "An ESD wrist strap safely bleeds static electricity from a technician's body to ground, preventing damage to sensitive microcircuits[cite: 116, 120]. It must NEVER be worn when working inside high-voltage devices like power supply units (PSUs) or CRT monitors.",
+    "laymanExplanation": "A static shock you can't even feel (under 3,000V) can instantly destroy a CPU. The strap grounds you safely, but you detach it when working near raw mains power to avoid becoming an electrical ground path.",
+    "examTip": "ESD protection is about protecting internal components[cite: 116, 120]. Personal safety around high voltage requires disconnecting all ground straps."
+  },
+  {
+    "id": "NET-17",
+    "category": "Safety & Operations",
+    "topic": "Rack Cable Management & Thermal Risks",
+    "question": "What operational problem arises from unmanaged, tangled cabling inside server racks?",
+    "answer": "Airflow obstruction leading to hot spots, thermal throttling, and equipment overheating[cite: 98, 101].",
+    "laymanExplanation": "Dense bundles of loose cables block intake and exhaust airflow through server chassis, causing fans to spin at maximum speed and components to overheat and fail.",
+    "examTip": "Proper cable management with horizontal/vertical managers directly supports thermal efficiency and equipment lifespan."
+  },
+  {
+    "id": "NET-18",
+    "category": "Safety & Operations",
+    "topic": "Cable Handling Standards",
+    "question": "What installation practices preserve both the physical integrity and transmission performance of copper cables?",
+    "answer": "Maintaining minimum bend radius specifications and using hook-and-loop (Velcro) straps instead of overtightened plastic zip ties[cite: 60, 62].",
+    "laymanExplanation": "Twisting or pinching network cables damages the internal copper twists, resulting in signal degradation and crosstalk between wire pairs.",
+    "examTip": "Zip ties can crimp and deform Category cable geometry. Always prefer hook-and-loop / Velcro ties in exams[cite: 62]."
+  },
+  {
+    "id": "NET-19",
+    "category": "Safety & Operations",
+    "topic": "PPE Requirements",
+    "question": "What Personal Protective Equipment is mandatory when terminating copper cabling and fiber optics?",
+    "answer": "Safety glasses to protect eyes from flying copper wire fragments and glass fiber shards[cite: 66, 68].",
+    "laymanExplanation": "When trimming twisted pair wires or cleaving glass fiber strands, small sharp shards easily launch into the air and cause severe eye injury.",
+    "examTip": "Fiber cleaving also requires dedicated scrap containers and adhesive mats to capture glass splinters."
+  },
+  {
+    "id": "NET-20",
+    "category": "Safety & Operations",
+    "topic": "Physical Environmental Safety",
+    "question": "What is a leading physical hazard in networking closets and server rooms that requires active mitigation?",
+    "answer": "Tripping hazards caused by loose patch cords or tools left in walkways[cite: 36, 38, 85, 87].",
+    "laymanExplanation": "Cables trailing across a data center floor present a severe tripping hazard that can injure personnel and accidentally pull down running production systems.",
+    "examTip": "Maintain organized work areas, clean walkways, and run floor cable covers whenever temporary cabling is deployed[cite: 38]."
+  },
+  {
+    "id": "NET-21",
+    "category": "Certification Specs",
+    "topic": "CompTIA Network+ (N10-009) Parameters",
+    "question": "What are the structural test constraints (question count, duration) for the CompTIA Network+ (N10-009) exam?",
+    "answer": "A maximum of 90 questions [cite: 91, 96] delivered within a total time limit of 90 minutes[cite: 110, 113].",
+    "laymanExplanation": "You have an average of one minute per question, which requires efficient pacing across both multiple-choice and complex simulation questions.",
+    "examTip": "Passing score is 720 on a scale of 100–900."
+  },
+  {
+    "id": "NET-22",
+    "category": "Certification Specs",
+    "topic": "Performance-Based Questions (PBQ) Strategy",
+    "question": "What is the best initial approach when encountering a Performance-Based Question (PBQ)?",
+    "answer": "Carefully read the entire scenario, system topology, and required objectives before interacting with or configuring any simulated interfaces[cite: 43, 45].",
+    "laymanExplanation": "PBQs test practical configuration and troubleshooting skills; failing to read the initial constraints can lead to misconfiguring interfaces or resetting defaults unnecessarily.",
+    "examTip": "Many candidates flag PBQs at the start of the exam, complete the standard multiple-choice questions first, and then return to solve PBQs with remaining time."
+  },
+  {
+    "id": "NET-23",
+    "category": "OSI Layer 1",
+    "topic": "Physical Layer Fundamentals",
+    "question": "What is the role of OSI Layer 1, and what devices and transmission media operate here?",
+    "answer": "Layer 1 (Physical Layer) transmits unstructured raw bit streams over physical media. Media include UTP/STP copper cabling, optical fiber, and RF wireless; devices include Hubs, Repeaters, and Media Converters.",
+    "laymanExplanation": "Layer 1 is the physical hardware transferring electrical voltage, light pulses, or radio waves. If an unplugged cable or damaged connector exists, nothing above it works.",
+    "examTip": "Hubs and repeaters are dumb Layer 1 devices—they do not read MAC or IP addresses; they simply amplify and repeat electrical signals."
+  },
+  {
+    "id": "NET-24",
+    "category": "OSI Layer 2",
+    "topic": "Data Link Layer & MAC Addressing",
+    "question": "What are the primary functions of OSI Layer 2, and what are its two sublayers?",
+    "answer": "Layer 2 provides node-to-node node transfer, physical MAC addressing, and frame error checking. Its sublayers are Logical Link Control (LLC - 802.2) and Media Access Control (MAC - 802.3/802.11).",
+    "laymanExplanation": "This layer packages data into local 'Frames' and uses hardware MAC addresses to ensure packets hop across local switches to the right physical network interface card (NIC).",
+    "examTip": "Standard Layer 2 switches and Network Interface Cards (NICs) operate at the Data Link Layer."
+  },
+  {
+    "id": "NET-25",
+    "category": "OSI Layer 2",
+    "topic": "MAC Address Structure",
+    "question": "What is the structure, size, and representation of a MAC-48 (EUI-48) physical address?",
+    "answer": "It is a 48-bit (6-byte) hexadecimal address. The first 24 bits represent the Organizationally Unique Identifier (OUI / vendor prefix), and the last 24 bits represent the Network Interface Controller (NIC) specific identifier.",
+    "laymanExplanation": "Your MAC address is your hardware's burned-in digital fingerprint. The first half reveals who manufactured the chip (like Intel or Apple), and the second half is its unique serial number.",
+    "examTip": "Format examples: 00:1A:2B:3C:4D:5E or 00-1A-2B-3C-4D-5E or 001a.2b3c.4d5e."
+  },
+  {
+    "id": "NET-26",
+    "category": "OSI Layer 3",
+    "topic": "Network Layer & Logical Addressing",
+    "question": "What is the primary role of OSI Layer 3, and what core protocol and devices live here?",
+    "answer": "Layer 3 handles end-to-end logical addressing (IP addresses), packet forwarding, and path determination (routing). Core protocols include IPv4, IPv6, ICMP, and IPsec; primary devices are Routers and Layer 3 Switches.",
+    "laymanExplanation": "Layer 3 enables devices on completely different physical networks across the world to find and talk to one another using logical routing.",
+    "examTip": "Routers make forwarding decisions based on Layer 3 destination IP addresses using their internal routing tables."
+  },
+  {
+    "id": "NET-27",
+    "category": "OSI Layer 4",
+    "topic": "Transport Layer Protocols (TCP vs. UDP)",
+    "question": "What are the fundamental differences between Transmission Control Protocol (TCP) and User Datagram Protocol (UDP)?",
+    "answer": "TCP is connection-oriented, reliable, uses a 3-way handshake, provides sequencing, error checking, and retransmission. UDP is connectionless, unreliable ('best effort'), lightweight, and incurs minimal overhead.",
+    "laymanExplanation": "TCP is a tracked delivery where every package must be signed for; if a package is lost, it is resent. UDP is live streaming or broadcasting—if a frame drops, it keeps going without waiting.",
+    "examTip": "VoIP, DNS queries, DHCP, and live video stream with UDP. Web browsing (HTTPS), file transfers (FTP/SSH), and email rely on TCP."
+  },
+  {
+    "id": "NET-28",
+    "category": "Core Protocols",
+    "topic": "TCP 3-Way Handshake",
+    "question": "What is the exact 3-step sequence used by TCP to establish a reliable connection?",
+    "answer": "1. SYN (Client sends Synchronize sequence number) → 2. SYN-ACK (Server replies with Synchronize-Acknowledgment) → 3. ACK (Client sends final Acknowledgment).",
+    "laymanExplanation": "1. 'Can you hear me?' 2. 'Yes, I hear you, can you hear me?' 3. 'Yes, I hear you, let's talk.'",
+    "examTip": "Connection teardown uses a 4-step exchange: FIN → ACK → FIN → ACK (or combined FIN-ACK exchanges)."
+  },
+  {
+    "id": "NET-29",
+    "category": "OSI Layer 5",
+    "topic": "Session Layer Responsibilities",
+    "question": "What is the role of OSI Layer 5 (Session Layer)?",
+    "answer": "It establishes, manages, maintains, and terminates communication sessions and dialogues between two endpoints.",
+    "laymanExplanation": "The Session layer acts as the meeting coordinator. It starts the conference call, keeps it alive during interruptions, and ends the call cleanly when finished.",
+    "examTip": "Protocols and concepts associated with Layer 5 include NetBIOS, RPC, and SOCKS."
+  },
+  {
+    "id": "NET-30",
+    "category": "OSI Layer 6",
+    "topic": "Presentation Layer Functions",
+    "question": "What three major tasks occur at OSI Layer 6 (Presentation Layer)?",
+    "answer": "Data translation/formatting, data compression, and data encryption/decryption.",
+    "laymanExplanation": "The Presentation layer is the translator and security officer. It converts formats (ASCII, JPEG), compresses data to save size, and encrypts/decrypts secure data (SSL/TLS).",
+    "examTip": "Keywords for Layer 6: Encryption (TLS/SSL), Compression (Gzip), and Syntax/Formatting (MIME, ASCII, JPEG)."
+  },
+  {
+    "id": "NET-31",
+    "category": "OSI Layer 7",
+    "topic": "Application Layer Protocols",
+    "question": "What is the function of OSI Layer 7, and what are common examples of protocols running here?",
+    "answer": "It directly exposes software services and APIs to end-user applications. Examples include HTTP/HTTPS, DNS, DHCP, SSH, FTP, Telnet, SMTP, IMAP, and SNMP.",
+    "laymanExplanation": "This is the language the programs on your computer speak directly (e.g., your browser requesting a page via HTTP).",
+    "examTip": "Layer 7 does NOT refer to the application itself (like Google Chrome), but rather the protocol protocol (HTTP/HTTPS) that the application uses."
+  },
+  {
+    "id": "NET-32",
+    "category": "Addressing & Subnetting",
+    "topic": "IPv4 Structure & Class System",
+    "question": "What is the structure of an IPv4 address and what are the classic address classes?",
+    "answer": "IPv4 uses 32-bit addresses formatted as 4 octets in dotted-decimal notation. Class A: 1.0.0.0–126.255.255.255 (/8); Class B: 128.0.0.0–191.255.255.255 (/16); Class C: 192.0.0.0–223.255.255.255 (/24); Class D (Multicast): 224.0.0.0–239.255.255.255; Class E (Experimental): 240.0.0.0–255.255.255.255. 127.0.0.0/8 is reserved for loopback.",
+    "laymanExplanation": "A 32-bit number written as four numbers separated by dots (e.g., 192.168.1.1). Classes were early categories based on company sizes before modern CIDR was invented.",
+    "examTip": "127.0.0.1 is the universal local loopback address ('localhost')."
+  },
+  {
+    "id": "NET-33",
+    "category": "Addressing & Subnetting",
+    "topic": "RFC 1918 Private IP Ranges",
+    "question": "What are the three standardized private IPv4 address ranges defined by RFC 1918?",
+    "answer": "Class A Private: 10.0.0.0 to 10.255.255.255 (10.0.0.0/8); Class B Private: 172.16.0.0 to 172.31.255.255 (172.16.0.0/12); Class C Private: 192.168.0.0 to 192.168.255.255 (192.168.0.0/16).",
+    "laymanExplanation": "These addresses are free for internal homes and corporate offices. They cannot be routed directly over the public internet and require NAT to access outside websites.",
+    "examTip": "Memorize these 3 ranges cold; any address outside these (and APIPA/loopback) is generally a public routable IP."
+  },
+  {
+    "id": "NET-34",
+    "category": "Addressing & Subnetting",
+    "topic": "APIPA (Automatic Private IP Addressing)",
+    "question": "What IPv4 address range indicates a client failed to obtain a lease from a DHCP server?",
+    "answer": "169.254.0.1 through 169.254.255.254 (169.254.0.0/16).",
+    "laymanExplanation": "If your computer asks for a DHCP address and gets no response, it assigns itself an APIPA address starting with 169.254.x.x so it can still communicate locally, but it cannot access the internet.",
+    "examTip": "Seeing a 169.254.x.x IP address on a workstation immediately points to a DHCP failure or network connectivity issue between the client and DHCP server."
+  },
+  {
+    "id": "NET-35",
+    "category": "Addressing & Subnetting",
+    "topic": "IPv6 Fundamentals",
+    "question": "What are the structural properties, address length, and formatting of IPv6?",
+    "answer": "IPv6 addresses are 128 bits long, written as 8 groups of 4 hexadecimal digits (hextets) separated by colons. Consecutive fields of zeroes can be compressed once with '::', and leading zeroes within a hextet can be dropped.",
+    "laymanExplanation": "Because the world ran out of 32-bit IPv4 addresses, IPv6 provides $2^{128}$ possible addresses—enough to assign trillions of IPs to every atom on Earth.",
+    "examTip": "IPv6 Loopback is ::1. IPv6 Link-Local addresses always start with the prefix fe80::/10. Global Unicast starts with 2000::/3."
+  },
+  {
+    "id": "NET-36",
+    "category": "Core Protocols",
+    "topic": "ARP & Address Resolution",
+    "question": "What is the purpose of the Address Resolution Protocol (ARP) and what is ARP Spoofing / Poisoning?",
+    "answer": "ARP resolves a known Layer 3 logical IP address to an unknown Layer 2 physical MAC address on a local segment. ARP Poisoning/Spoofing occurs when an attacker sends falsified ARP replies to link their own MAC address with the IP address of a legitimate default gateway or server.",
+    "laymanExplanation": "ARP is like calling out, 'Who owns IP 192.168.1.1? Tell me your MAC address!' ARP spoofing is a malicious actor shouting back 'That's me!' so all network traffic is redirected through their machine (Man-in-the-Middle).",
+    "examTip": "ARP operates between Layer 2 and Layer 3. Inspect the ARP table with the command `arp -a`."
+  },
+  {
+    "id": "NET-37",
+    "category": "Core Protocols",
+    "topic": "ICMP & Network Diagnostics",
+    "question": "What role does ICMP play, and how do ping and traceroute utilize it?",
+    "answer": "Internet Control Message Protocol (ICMP) sends error messages and operational information. 'Ping' sends ICMP Echo Requests (Type 8) and listens for ICMP Echo Replies (Type 0). 'Traceroute' increments the IP packet Time-To-Live (TTL) field starting at 1 to elicit ICMP Time Exceeded (Type 11) messages from each intermediate hop.",
+    "laymanExplanation": "Ping tests basic reachability. Traceroute maps the exact route and intermediate routers by intentionally expiring packets hop-by-hop.",
+    "examTip": "ICMP operates at Layer 3. If ping fails but web browsing works, ICMP is likely blocked by an intervening firewall."
+  },
+  {
+    "id": "NET-38",
+    "category": "Core Protocols",
+    "topic": "DHCP 4-Step Process (DORA)",
+    "question": "What are the four steps in the DHCP lease allocation process?",
+    "answer": "1. Discover (Client broadcasts to locate server) → 2. Offer (Server unicasts/broadcasts configuration offer) → 3. Request (Client requests offered IP) → 4. Acknowledge (Server finalizes lease).",
+    "laymanExplanation": "Remember D-O-R-A: Discover, Offer, Request, Acknowledge.",
+    "examTip": "DHCP operates over UDP using Port 67 (Server) and Port 68 (Client)."
+  },
+  {
+    "id": "NET-39",
+    "category": "Core Protocols",
+    "topic": "DNS Record Types & Hierarchy",
+    "question": "What is the function of DNS, and what do common record types (A, AAAA, CNAME, MX, PTR, TXT) represent?",
+    "answer": "DNS translates domain names to IP addresses (UDP/TCP Port 53). A Record: Maps name to IPv4; AAAA: Maps name to IPv6; CNAME: Canonical name / alias; MX: Mail Exchanger; PTR: Pointer for reverse DNS lookups (IP to name); TXT: Text records used for SPF, DKIM, and domain verification.",
+    "laymanExplanation": "DNS is the internet's phonebook. You type 'example.com', and DNS gives your computer the IP address needed to connect.",
+    "examTip": "Standard queries use UDP 53; DNS zone transfers between servers use TCP 53."
+  },
+  {
+    "id": "NET-40",
+    "category": "Ports & Protocols",
+    "topic": "Essential Network Ports & Services",
+    "question": "What are the port numbers, transport protocols, and functions for FTP, SSH, Telnet, SMTP, HTTP, HTTPS, and RDP?",
+    "answer": "FTP: TCP 20/21 (File transfer); SSH: TCP 22 (Secure remote shell); Telnet: TCP 23 (Unencrypted text shell); SMTP: TCP 25 (Mail relay); HTTP: TCP 80 (Unencrypted web); HTTPS: TCP 443 (Encrypted web); RDP: TCP/UDP 3389 (Remote Desktop Protocol).",
+    "laymanExplanation": "Port numbers are like apartment room numbers at a given building address (the IP address). They route traffic to the exact software service running inside.",
+    "examTip": "Never use Telnet (23) or plain HTTP (80) when sensitive credentials are transmitted; use SSH (22) and HTTPS (443) for encryption."
+  },
+  {
+    "id": "NET-41",
+    "category": "Network Topologies",
+    "topic": "Physical vs. Logical Topologies",
+    "question": "What are the characteristics of Star, Mesh, and Bus topologies?",
+    "answer": "Star: All endpoints connect to a central hub/switch; single cable failure affects only that host. Mesh: Devices interconnect with redundant links (Full Mesh formula: n(n-1)/2); provides maximum fault tolerance at high cost. Bus: All devices share a single trunk cable terminated at both ends; trunk break disrupts entire segment.",
+    "laymanExplanation": "Star is standard modern office wiring (switch in center). Mesh is critical data centers where every router has backup paths. Bus is legacy cabling where one wire cut breaks the whole network.",
+    "examTip": "Star is the most common physical topology used in modern Ethernet LANs."
+  },
+  {
+    "id": "NET-42",
+    "category": "Network Devices",
+    "topic": "Collision vs. Broadcast Domains",
+    "question": "How do Hubs, Layer 2 Switches, and Routers segment collision domains and broadcast domains?",
+    "answer": "Hubs: Single collision domain across all ports, single broadcast domain. Switches: Break up collision domains (each switch port is its own separate collision domain), but share a single broadcast domain per VLAN. Routers: Break up both collision domains and broadcast domains on every interface.",
+    "laymanExplanation": "Switches prevent devices from talking over each other (no collisions), but if someone shouts a broadcast, everyone on the switch hears it. Routers put up soundproof walls that block broadcasts from leaking into other networks.",
+    "examTip": "Count switch ports to count collision domains. Count router interfaces to count broadcast domains."
+  },
+  {
+    "id": "NET-43",
+    "category": "Network Security & Architecture",
+    "topic": "VLANs & 802.1Q Trunking",
+    "question": "What is a Virtual LAN (VLAN) and how does IEEE 802.1Q enable trunking?",
+    "answer": "A VLAN logically segments a single physical switch into multiple isolated broadcast domains. IEEE 802.1Q adds a 4-byte VLAN tag (including a 12-bit VLAN ID) to Ethernet frames passing over trunk links between switches.",
+    "laymanExplanation": "Instead of buying 5 different physical switches for HR, Accounting, and Guests, you buy 1 switch and logically partition it into 5 isolated virtual switches.",
+    "examTip": "VLAN 1 is the default native VLAN on Cisco and many industry switches. Inter-VLAN communication requires a Layer 3 router or Layer 3 switch."
+  },
+  {
+    "id": "NET-44",
+    "category": "Network Security & Architecture",
+    "topic": "Network Address Translation (NAT / PAT)",
+    "question": "What is the difference between Static NAT, Dynamic NAT, and Port Address Translation (PAT)?",
+    "answer": "Static NAT maps one private IP to one public IP (1:1). Dynamic NAT maps private IPs to a pool of public IPs (many:many pool). PAT (NAT Overload) maps multiple private IP addresses to a single public IP address using unique source port numbers.",
+    "laymanExplanation": "PAT is what your home Wi-Fi router uses. Your phone, laptop, and TV all share one single public IP from your ISP; the router tracks who gets what response using different port numbers.",
+    "examTip": "PAT is officially termed 'NAT Overload'."
+  },
+  {
+    "id": "NET-45",
+    "category": "Network Security & Architecture",
+    "topic": "Firewalls (Stateful vs. Stateless)",
+    "question": "What is the operational difference between a stateless packet filter and a stateful inspection firewall?",
+    "answer": "Stateless firewalls evaluate individual packets in isolation against static access control lists (ACLs) without tracking connection status. Stateful firewalls monitor active connection states (TCP handshakes, UDP sessions) and automatically permit returning reply traffic for established sessions.",
+    "laymanExplanation": "Stateless is a security guard checking IDs with no memory of who just walked out. Stateful remembers that you just walked outside to grab lunch and lets you right back in without re-checking your whole ID.",
+    "examTip": "Stateful firewalls track the state of connections in a state table (e.g., NEW, ESTABLISHED, RELATED)."
+  },
+  {
+    "id": "NET-46",
+    "category": "Packet Analysis & Penetration Testing",
+    "topic": "Wireshark & Promiscuous Mode",
+    "question": "What mode must a Network Interface Card (NIC) be placed into for packet analyzers like Wireshark to capture all network frames on a segment?",
+    "answer": "Promiscuous mode (or Monitor mode for wireless capture).",
+    "laymanExplanation": "Normally, a NIC ignores any network packet not addressed to its own MAC address. Promiscuous mode tells the card: 'Capture and process everything traveling on this physical wire, regardless of destination.'",
+    "examTip": "In switched networks, promiscuous mode alone only captures broadcast/multicast unless port mirroring (SPAN) or ARP spoofing is utilized."
+  }
+]
