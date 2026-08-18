@@ -17,7 +17,7 @@ const INVENTORY: HeaderItem[] = [
   { id: 't-l2', layer: 2, label: 'FCS Trailer (CRC Checksum)', type: 'trailer', tag: 'Trailer' },
 ];
 
-export function PduSimulator() {
+export default function PduEncapsulation() {
   const [currentLayer, setCurrentLayer] = useState<number>(4);
   const [attached, setAttached] = useState<HeaderItem[]>([]);
   const [payload] = useState<string>('HTTP: GET /api/v1/auth');

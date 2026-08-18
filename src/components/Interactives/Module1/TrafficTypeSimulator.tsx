@@ -20,7 +20,7 @@ const INITIAL_NODES: Node[] = [
   { id: 'n4', name: 'Node D', x: 320, y: 260, subscribed: false, distance: 10 },
 ];
 
-export function TrafficVisualizer() {
+export default function TrafficTypeSimulator() {
   const [mode, setMode] = useState<CastMode>('multicast');
   const [nodes, setNodes] = useState<Node[]>(INITIAL_NODES);
   const [unicastTarget, setUnicastTarget] = useState<string>('n1');

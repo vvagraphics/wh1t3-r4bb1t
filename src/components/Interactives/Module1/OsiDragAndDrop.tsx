@@ -48,7 +48,7 @@ const OSI_LAYERS = [
   { num: 1, name: 'Physical' },
 ];
 
-export function OsiDiagnosticGame() {
+export default function OsiDragAndDrop() {
   const [index, setIndex] = useState(0);
   const [selectedLayer, setSelectedLayer] = useState<number | null>(null);
   const [status, setStatus] = useState<'unanswered' | 'correct' | 'incorrect'>('unanswered');

@@ -4,7 +4,7 @@
     "category": "Network Models",
     "topic": "TCP/IP Model Architecture",
     "question": "What are the four layers of the standard TCP/IP model from top to bottom?",
-    "answer": "Application, Transport, Internet, and Network Access[cite: 22, 24, 25].",
+    "answer": "Application, Transport, Internet, and Network Access.",
     "laymanExplanation": "Think of it like a corporate command chain: The CEO (Application) writes a message, the Department Manager (Transport) organizes and chunks it, the Mailroom (Internet) stamps the destination address on it, and the Courier (Network Access) physically drives it across town.",
     "examTip": "Use the acronym ATIN (Application, Transport, Internet, Network Access). Do not confuse this with the 7-layer OSI model."
   },
@@ -22,9 +22,9 @@
     "category": "Network Models",
     "topic": "TCP/IP Transport Layer",
     "question": "What functions are handled by the TCP/IP Transport Layer, and what are its PDUs?",
-    "answer": "It manages end-to-end delivery, reliability, flow control, and segmentation[cite: 126]; its PDUs are Segments (when using TCP) and Datagrams (when using UDP).",
+    "answer": "It manages end-to-end delivery, reliability, flow control, and segmentation; its PDUs are Segments (when using TCP) and Datagrams (when using UDP).",
     "laymanExplanation": "This is the packaging facility. It splits a massive payload into numbered pieces (segments) so they fit down the wire and can be reassembled in the right order.",
-    "examTip": "Whenever an exam question mentions 'flow control', 'segmentation', 'reliability', or 'port numbers', point to the Transport layer[cite: 126]."
+    "examTip": "Whenever an exam question mentions 'flow control', 'segmentation', 'reliability', or 'port numbers', point to the Transport layer."
   },
   {
     "id": "NET-04",
@@ -49,7 +49,7 @@
     "category": "Encapsulation & Data Flow",
     "topic": "PDU Encapsulation Sequence",
     "question": "What is the exact sequence of data units (PDUs) during encapsulation from top to bottom?",
-    "answer": "Data → Segment → Packet → Frame → Bits[cite: 130, 132].",
+    "answer": "Data → Segment → Packet → Frame → Bits.",
     "laymanExplanation": "You start with raw content (Data), wrap it into a numbered shipping box (Segment), put a destination routing label on it (Packet), place it in a local delivery vehicle (Frame), and transmit it as raw energy pulses (Bits).",
     "examTip": "Mnemonic: Don't Some People Fear Bats (Data, Segment, Packet, Frame, Bits)."
   },
@@ -58,7 +58,7 @@
     "category": "Encapsulation & Data Flow",
     "topic": "The Encapsulation Process",
     "question": "What occurs to data during the encapsulation process as it moves down the network stack?",
-    "answer": "Protocol headers (and trailers where applicable, such as the FCS trailer at L2) are appended to the payload at each descending layer[cite: 30, 32].",
+    "answer": "Protocol headers (and trailers where applicable, such as the FCS trailer at L2) are appended to the payload at each descending layer.",
     "laymanExplanation": "Think of nesting Russian dolls or nesting envelopes. Every department adds its own outer envelope with specific instructions before passing it down.",
     "examTip": "Encapsulation happens on the sender side. Headers are added going down; trailers (FCS) are typically added at Layer 2."
   },
@@ -67,7 +67,7 @@
     "category": "Encapsulation & Data Flow",
     "topic": "The Decapsulation Process",
     "question": "What process removes protocol headers as data travels up the protocol stack at the receiving host?",
-    "answer": "Decapsulation[cite: 48, 50].",
+    "answer": "Decapsulation.",
     "laymanExplanation": "The receiving computer opens each outer envelope one by one, strips off the routing and transport metadata, and delivers the clean application payload to the target software.",
     "examTip": "Decapsulation happens at the receiver side as data travels UP the stack from Physical to Application."
   },
@@ -76,7 +76,7 @@
     "category": "Network Models",
     "topic": "OSI vs. TCP/IP Models",
     "question": "What is the structural and conceptual relationship between the OSI and TCP/IP models?",
-    "answer": "The TCP/IP model is a practical protocol suite implemented across the internet, while the OSI model is a theoretical 7-layer architectural framework used for standardizing network communication and teaching[cite: 54, 56].",
+    "answer": "The TCP/IP model is a practical protocol suite implemented across the internet, while the OSI model is a theoretical 7-layer architectural framework used for standardizing network communication and teaching.",
     "laymanExplanation": "OSI is the theoretical textbook engineering standard; TCP/IP is the actual real-world engine running inside every connected device.",
     "examTip": "OSI has 7 layers (Physical to Application). TCP/IP has 4 layers (Network Access to Application)."
   },
@@ -85,7 +85,7 @@
     "category": "Troubleshooting",
     "topic": "Layered Troubleshooting Methodology",
     "question": "Why are layered network models advantageous when diagnosing and resolving network issues?",
-    "answer": "They provide a structured, systematic framework to isolate faults to specific hardware, protocol, or software layers[cite: 104, 106].",
+    "answer": "They provide a structured, systematic framework to isolate faults to specific hardware, protocol, or software layers.",
     "laymanExplanation": "Instead of guessing, you test methodically: verify physical link lights (L1), check local switch connectivity (L2), verify IP ping/routing (L3), verify port availability (L4), and check the software configuration (L7).",
     "examTip": "Common exam troubleshooting approaches include Bottom-Up (L1 to L7), Top-Down (L7 to L1), and Divide-and-Conquer (starting at L3/ping)."
   },
@@ -94,7 +94,7 @@
     "category": "Traffic Types",
     "topic": "Unicast Traffic",
     "question": "What characterizes unicast network communication?",
-    "answer": "Traffic sent from one single sender directly to one single specific receiver[cite: 72, 74].",
+    "answer": "Traffic sent from one single sender directly to one single specific receiver.",
     "laymanExplanation": "A private phone call between two individuals. Only the designated recipient receives and processes the data.",
     "examTip": "Unicast uses a unique destination MAC/IP address. It is the most common traffic type on the internet."
   },
@@ -103,7 +103,7 @@
     "category": "Traffic Types",
     "topic": "Broadcast Traffic",
     "question": "Where is a broadcast transmission delivered, and how do network devices handle it?",
-    "answer": "It is delivered to all active hosts residing within the same broadcast domain[cite: 14, 17]. Routers do not forward Layer 2/3 broadcasts across network boundaries by default.",
+    "answer": "It is delivered to all active hosts residing within the same broadcast domain. Routers do not forward Layer 2/3 broadcasts across network boundaries by default.",
     "laymanExplanation": "Shouting through a megaphone in an enclosed auditorium. Everyone in the room must listen to the message, but people outside the building (past the router) do not hear it.",
     "examTip": "Layer 2 Broadcast MAC = FF:FF:FF:FF:FF:FF. Layer 3 IPv4 Broadcast = 255.255.255.255 (or subnet broadcast address)."
   },
@@ -112,7 +112,7 @@
     "category": "Traffic Types",
     "topic": "Multicast Traffic",
     "question": "Why is multicast more efficient than broadcast for one-to-many communications?",
-    "answer": "Multicast delivers data only to interested nodes that have explicitly subscribed to or joined a specific multicast group[cite: 78, 81].",
+    "answer": "Multicast delivers data only to interested nodes that have explicitly subscribed to or joined a specific multicast group.",
     "laymanExplanation": "Like a TV or radio station broadcast. The stream exists, but only devices tuned into that exact channel process the data, saving bandwidth across all other devices.",
     "examTip": "IPv4 Multicast address range: 224.0.0.0 through 239.255.255.255 (Class D). IPv6 Multicast begins with the prefix ff00::/8."
   },
@@ -130,25 +130,25 @@
     "category": "Safety & Operations",
     "topic": "Electrical Safety & LOTO",
     "question": "What is the primary procedure for eliminating electrical injury risk during server rack maintenance?",
-    "answer": "De-energize the equipment and apply lockout/tagout (LOTO) protocols to ensure the power source remains disconnected[cite: 7, 10].",
+    "answer": "De-energize the equipment and apply lockout/tagout (LOTO) protocols to ensure the power source remains disconnected.",
     "laymanExplanation": "Shut down the power breaker and put a padlock and warning tag on the switch so no one can restore power while you are working inside the equipment.",
-    "examTip": "Look for 'Lockout/Tagout' or 'LOTO' whenever electrical isolation and physical safety are tested[cite: 10]."
+    "examTip": "Look for 'Lockout/Tagout' or 'LOTO' whenever electrical isolation and physical safety are tested."
   },
   {
     "id": "NET-16",
     "category": "Safety & Operations",
     "topic": "Electrostatic Discharge (ESD)",
     "question": "What is the purpose of an ESD wrist strap and when should it be avoided?",
-    "answer": "An ESD wrist strap safely bleeds static electricity from a technician's body to ground, preventing damage to sensitive microcircuits[cite: 116, 120]. It must NEVER be worn when working inside high-voltage devices like power supply units (PSUs) or CRT monitors.",
+    "answer": "An ESD wrist strap safely bleeds static electricity from a technician's body to ground, preventing damage to sensitive microcircuits. It must NEVER be worn when working inside high-voltage devices like power supply units (PSUs) or CRT monitors.",
     "laymanExplanation": "A static shock you can't even feel (under 3,000V) can instantly destroy a CPU. The strap grounds you safely, but you detach it when working near raw mains power to avoid becoming an electrical ground path.",
-    "examTip": "ESD protection is about protecting internal components[cite: 116, 120]. Personal safety around high voltage requires disconnecting all ground straps."
+    "examTip": "ESD protection is about protecting internal components. Personal safety around high voltage requires disconnecting all ground straps."
   },
   {
     "id": "NET-17",
     "category": "Safety & Operations",
     "topic": "Rack Cable Management & Thermal Risks",
     "question": "What operational problem arises from unmanaged, tangled cabling inside server racks?",
-    "answer": "Airflow obstruction leading to hot spots, thermal throttling, and equipment overheating[cite: 98, 101].",
+    "answer": "Airflow obstruction leading to hot spots, thermal throttling, and equipment overheating.",
     "laymanExplanation": "Dense bundles of loose cables block intake and exhaust airflow through server chassis, causing fans to spin at maximum speed and components to overheat and fail.",
     "examTip": "Proper cable management with horizontal/vertical managers directly supports thermal efficiency and equipment lifespan."
   },
@@ -157,16 +157,16 @@
     "category": "Safety & Operations",
     "topic": "Cable Handling Standards",
     "question": "What installation practices preserve both the physical integrity and transmission performance of copper cables?",
-    "answer": "Maintaining minimum bend radius specifications and using hook-and-loop (Velcro) straps instead of overtightened plastic zip ties[cite: 60, 62].",
+    "answer": "Maintaining minimum bend radius specifications and using hook-and-loop (Velcro) straps instead of overtightened plastic zip ties.",
     "laymanExplanation": "Twisting or pinching network cables damages the internal copper twists, resulting in signal degradation and crosstalk between wire pairs.",
-    "examTip": "Zip ties can crimp and deform Category cable geometry. Always prefer hook-and-loop / Velcro ties in exams[cite: 62]."
+    "examTip": "Zip ties can crimp and deform Category cable geometry. Always prefer hook-and-loop / Velcro ties in exams."
   },
   {
     "id": "NET-19",
     "category": "Safety & Operations",
     "topic": "PPE Requirements",
     "question": "What Personal Protective Equipment is mandatory when terminating copper cabling and fiber optics?",
-    "answer": "Safety glasses to protect eyes from flying copper wire fragments and glass fiber shards[cite: 66, 68].",
+    "answer": "Safety glasses to protect eyes from flying copper wire fragments and glass fiber shards.",
     "laymanExplanation": "When trimming twisted pair wires or cleaving glass fiber strands, small sharp shards easily launch into the air and cause severe eye injury.",
     "examTip": "Fiber cleaving also requires dedicated scrap containers and adhesive mats to capture glass splinters."
   },
@@ -175,16 +175,16 @@
     "category": "Safety & Operations",
     "topic": "Physical Environmental Safety",
     "question": "What is a leading physical hazard in networking closets and server rooms that requires active mitigation?",
-    "answer": "Tripping hazards caused by loose patch cords or tools left in walkways[cite: 36, 38, 85, 87].",
+    "answer": "Tripping hazards caused by loose patch cords or tools left in walkways.",
     "laymanExplanation": "Cables trailing across a data center floor present a severe tripping hazard that can injure personnel and accidentally pull down running production systems.",
-    "examTip": "Maintain organized work areas, clean walkways, and run floor cable covers whenever temporary cabling is deployed[cite: 38]."
+    "examTip": "Maintain organized work areas, clean walkways, and run floor cable covers whenever temporary cabling is deployed."
   },
   {
     "id": "NET-21",
     "category": "Certification Specs",
     "topic": "CompTIA Network+ (N10-009) Parameters",
     "question": "What are the structural test constraints (question count, duration) for the CompTIA Network+ (N10-009) exam?",
-    "answer": "A maximum of 90 questions [cite: 91, 96] delivered within a total time limit of 90 minutes[cite: 110, 113].",
+    "answer": "A maximum of 90 questions delivered within a total time limit of 90 minutes.",
     "laymanExplanation": "You have an average of one minute per question, which requires efficient pacing across both multiple-choice and complex simulation questions.",
     "examTip": "Passing score is 720 on a scale of 100–900."
   },
@@ -193,7 +193,7 @@
     "category": "Certification Specs",
     "topic": "Performance-Based Questions (PBQ) Strategy",
     "question": "What is the best initial approach when encountering a Performance-Based Question (PBQ)?",
-    "answer": "Carefully read the entire scenario, system topology, and required objectives before interacting with or configuring any simulated interfaces[cite: 43, 45].",
+    "answer": "Carefully read the entire scenario, system topology, and required objectives before interacting with or configuring any simulated interfaces.",
     "laymanExplanation": "PBQs test practical configuration and troubleshooting skills; failing to read the initial constraints can lead to misconfiguring interfaces or resetting defaults unnecessarily.",
     "examTip": "Many candidates flag PBQs at the start of the exam, complete the standard multiple-choice questions first, and then return to solve PBQs with remaining time."
   },
@@ -211,7 +211,7 @@
     "category": "OSI Layer 2",
     "topic": "Data Link Layer & MAC Addressing",
     "question": "What are the primary functions of OSI Layer 2, and what are its two sublayers?",
-    "answer": "Layer 2 provides node-to-node node transfer, physical MAC addressing, and frame error checking. Its sublayers are Logical Link Control (LLC - 802.2) and Media Access Control (MAC - 802.3/802.11).",
+    "answer": "Layer 2 provides node-to-node transfer, physical MAC addressing, and frame error checking. Its sublayers are Logical Link Control (LLC - 802.2) and Media Access Control (MAC - 802.3/802.11).",
     "laymanExplanation": "This layer packages data into local 'Frames' and uses hardware MAC addresses to ensure packets hop across local switches to the right physical network interface card (NIC).",
     "examTip": "Standard Layer 2 switches and Network Interface Cards (NICs) operate at the Data Link Layer."
   },
@@ -276,7 +276,7 @@
     "question": "What is the function of OSI Layer 7, and what are common examples of protocols running here?",
     "answer": "It directly exposes software services and APIs to end-user applications. Examples include HTTP/HTTPS, DNS, DHCP, SSH, FTP, Telnet, SMTP, IMAP, and SNMP.",
     "laymanExplanation": "This is the language the programs on your computer speak directly (e.g., your browser requesting a page via HTTP).",
-    "examTip": "Layer 7 does NOT refer to the application itself (like Google Chrome), but rather the protocol protocol (HTTP/HTTPS) that the application uses."
+    "examTip": "Layer 7 does NOT refer to the application itself (like Google Chrome), but rather the protocol (HTTP/HTTPS) that the application uses."
   },
   {
     "id": "NET-32",
@@ -311,7 +311,7 @@
     "topic": "IPv6 Fundamentals",
     "question": "What are the structural properties, address length, and formatting of IPv6?",
     "answer": "IPv6 addresses are 128 bits long, written as 8 groups of 4 hexadecimal digits (hextets) separated by colons. Consecutive fields of zeroes can be compressed once with '::', and leading zeroes within a hextet can be dropped.",
-    "laymanExplanation": "Because the world ran out of 32-bit IPv4 addresses, IPv6 provides $2^{128}$ possible addresses—enough to assign trillions of IPs to every atom on Earth.",
+    "laymanExplanation": "Because the world ran out of 32-bit IPv4 addresses, IPv6 offers enough possible addresses to assign trillions of IPs to every atom on Earth.",
     "examTip": "IPv6 Loopback is ::1. IPv6 Link-Local addresses always start with the prefix fe80::/10. Global Unicast starts with 2000::/3."
   },
   {
