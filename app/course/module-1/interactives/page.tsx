@@ -5,6 +5,7 @@ import Link from "next/link";
 import OsiDragAndDrop from "@/src/components/Interactives/Module1/OsiDragAndDrop";
 import TrafficTypeSimulator from "@/src/components/Interactives/Module1/TrafficTypeSimulator";
 import PduEncapsulation from "@/src/components/Interactives/Module1/PduEncapsulation"; 
+import NetworkLabMatrix from "@/src/components/Interactives/Module1/NetworkLabMatrix";
 
 export default function InteractivesPage() {
   // This state tracks which tab is currently active (default is 1)
@@ -53,6 +54,16 @@ export default function InteractivesPage() {
         >
           03: PDU Encapsulation
         </button>
+        <button
+          onClick={() => setActiveSim(4)}
+          className={`px-6 py-3 font-bold uppercase tracking-wider transition-all duration-300 ${
+            activeSim === 2 
+              ? 'bg-[#00ff41] text-black shadow-[0_0_15px_rgba(0,255,65,0.6)]' 
+              : 'border border-gray-700 text-[#00ff41] hover:border-[#00ff41]'
+          }`}
+        >
+          04: Network Lab Matrix
+        </button>
       </div>
 
       {/* ACTIVE SIMULATION DISPLAY */}
@@ -60,6 +71,7 @@ export default function InteractivesPage() {
         {activeSim === 1 && <OsiDragAndDrop />}
         {activeSim === 2 && <TrafficTypeSimulator />}
         {activeSim === 3 && <PduEncapsulation />}
+        {activeSim === 4 && <NetworkLabMatrix />}
       </div>
 
     </div>

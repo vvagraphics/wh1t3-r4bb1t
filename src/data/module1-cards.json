@@ -412,5 +412,221 @@
     "answer": "Promiscuous mode (or Monitor mode for wireless capture).",
     "laymanExplanation": "Normally, a NIC ignores any network packet not addressed to its own MAC address. Promiscuous mode tells the card: 'Capture and process everything traveling on this physical wire, regardless of destination.'",
     "examTip": "In switched networks, promiscuous mode alone only captures broadcast/multicast unless port mirroring (SPAN) or ARP spoofing is utilized."
+  },
+  {
+    "id": "NET-47",
+    "category": "Transport Layer Protocols",
+    "topic": "TCP 3-Way Handshake",
+    "question": "What is the exact three-step sequence of control flags exchanged to establish a reliable connection in TCP?",
+    "answer": "1. SYN (Synchronize), 2. SYN/ACK (Synchronize/Acknowledgment), 3. ACK (Acknowledgment).",
+    "laymanExplanation": "Think of it like making a formal phone call: Caller says 'Hello, can you hear me?' (SYN), receiver responds 'Yes, I hear you, can you hear me?' (SYN/ACK), and caller confirms 'Yes, let's talk' (ACK). Only then does real conversation flow.",
+    "examTip": "CompTIA frequently tests the exact order. Remember the mnemonic SYN -> SYN/ACK -> ACK. A failure during the SYN stage usually points to a closed port, an offline host, or a firewall drop."
+  },
+  {
+    "id": "NET-48",
+    "category": "Transport Layer Protocols",
+    "topic": "TCP vs. UDP Characteristics",
+    "question": "What are the core differences between Transmission Control Protocol (TCP) and User Datagram Protocol (UDP)?",
+    "answer": "TCP is connection-oriented, reliable, guarantees in-order delivery via acknowledgments and retransmissions, and uses segmentation. UDP is connectionless, unreliable, offers no retransmission or ordering guarantees, and maximizes transmission speed.",
+    "laymanExplanation": "TCP is certified mail requiring a signature and return receipt. UDP is tossing flyers onto driveways out of a moving car—some might blow away, but it is fast and gets the message out with minimal effort.",
+    "examTip": "Questions referencing real-time audio/video streaming, VoIP, or online gaming point to UDP, whereas questions mentioning web browsing (HTTP/HTTPS), file downloads (FTP/SFTP), or emails point to TCP."
+  },
+  {
+    "id": "NET-49",
+    "category": "OSI & TCP/IP Models",
+    "topic": "Transport Layer PDUs",
+    "question": "What are the Protocol Data Units (PDUs) at Layer 4 (Transport Layer) for TCP and UDP respectively?",
+    "answer": "The Layer 4 PDU is a 'Segment' when using TCP and a 'Datagram' when using UDP.",
+    "laymanExplanation": "A Segment is a numbered, tracked box with bubble wrap and a barcode. A Datagram is an envelope tossed without tracking.",
+    "examTip": "Watch out for the 'Datagram' trap: UDP messages at Layer 4 are called Datagrams, but IP packets at Layer 3 are also sometimes referred to as 'IP Datagrams'. Look for transport/port clues versus routing/IP clues."
+  },
+  {
+    "id": "NET-50",
+    "category": "Transport Layer Protocols",
+    "topic": "Network Port Ranges",
+    "question": "What are the three standard port number ranges defined by IANA, and what are their respective boundaries?",
+    "answer": "1. Well-Known Ports: 0 to 1,023. 2. Registered Ports: 1,024 to 49,151. 3. Dynamic / Private / Ephemeral Ports: 49,152 to 65,535.",
+    "laymanExplanation": "Well-known ports are reserved for universal system utilities (like standard web or mail servers). Registered ports are assigned to specific software vendors. Ephemeral ports are temporary numbers handed out for short sessions.",
+    "examTip": "Total possible port numbers per transport protocol is 65,536 (0 through 65,535). Well-Known ports (0–1023) typically require root/administrative privileges to bind to on an operating system."
+  },
+  {
+    "id": "NET-51",
+    "category": "Transport Layer Protocols",
+    "topic": "Ephemeral Ports & Logical Multiplexing",
+    "question": "What is the purpose of a dynamic (ephemeral) port when a client initiates an outbound connection to a server?",
+    "answer": "It serves as a temporary, unique source port assigned to the client session so the host can distinguish returning traffic among multiple concurrent connections and route data to the correct local application.",
+    "laymanExplanation": "If an IP address is an apartment building's street address, the port number is the apartment number. Ephemeral ports are temporary PO boxes your browser creates so replies go to the right browser tab rather than your email client.",
+    "examTip": "Outbound client traffic uses a random high-numbered Ephemeral source port (49,152–65,535) and a Well-Known destination port (e.g., port 443 for HTTPS)."
+  },
+  {
+    "id": "NET-52",
+    "category": "Network Layer & Routing",
+    "topic": "Network Layer PDU & Addressing",
+    "question": "What is the Layer 3 PDU, and what two distinct components make up every IP address?",
+    "answer": "The Layer 3 PDU is the 'Packet'. Every IP address consists of a Network ID (identifying the subnet/network) and a Host ID (identifying the specific host interface on that subnet).",
+    "laymanExplanation": "In the street address '123 Maple Street, Apt 4B', '123 Maple Street' is the Network ID getting you to the right neighborhood/building, while 'Apt 4B' is the Host ID identifying the specific tenant.",
+    "examTip": "Routers make forwarding decisions based exclusively on the destination Network ID portion of an IP address, determined by the subnet mask."
+  },
+  {
+    "id": "NET-53",
+    "category": "Network Layer & Routing",
+    "topic": "Routers, Hops, and Default Gateways",
+    "question": "How does a router determine where to forward a packet, and what role does the default gateway play for local hosts?",
+    "answer": "A router consults its routing table to forward packets to the 'next hop' (the next intermediary router along the path). The default gateway is the local Layer 3 router interface to which hosts send all traffic destined outside their local subnet.",
+    "laymanExplanation": "A hop is each jump a packet takes from one router to another across the internet. The default gateway is the exit door of your local network that hands your traffic off to the rest of the world.",
+    "examTip": "If a host cannot communicate with devices outside its local subnet but can reach other local devices on the same switch, the issue is almost always a missing or misconfigured Default Gateway IP."
+  },
+  {
+    "id": "NET-54",
+    "category": "Network Layer & Routing",
+    "topic": "ICMP (Internet Control Message Protocol)",
+    "question": "What is the primary function of ICMP, and which fundamental troubleshooting tools rely on it?",
+    "answer": "ICMP is a Layer 3 support protocol used by network devices for diagnostics, error reporting, and operational queries (it does not carry user payload data). Ping and Traceroute (Tracert) rely directly on ICMP.",
+    "laymanExplanation": "ICMP is like the check-engine light or diagnostic scanner in a car. Ping sends an ICMP Echo Request and listens for an Echo Reply to check if a remote host is alive and measure latency.",
+    "examTip": "Traceroute uses ICMP (or UDP with ICMP TTL Exceeded responses) to map out every single router hop between the source and destination."
+  },
+  {
+    "id": "NET-55",
+    "category": "Data Link & Local Switching",
+    "topic": "MAC Address Structure & OUI",
+    "question": "What is the bit length, format, and internal structure of a standard Layer 2 MAC address?",
+    "answer": "A MAC address is 48 bits (6 bytes) long, represented as 12 hexadecimal characters. The first 24 bits (3 bytes) represent the Organizationally Unique Identifier (OUI) assigned to the manufacturer, and the last 24 bits represent the vendor-assigned device/NIC identifier.",
+    "laymanExplanation": "A MAC address is a permanent hardware fingerprint burned into the network card. The first half identifies the brand (e.g., Intel, Apple), and the second half is the unique serial number of that specific card.",
+    "examTip": "CompTIA often tests the distinction between OUI (first 24 bits / 3 bytes) and the vendor-assigned controller ID (last 24 bits / 3 bytes). Format: XX:XX:XX:YY:YY:YY."
+  },
+  {
+    "id": "NET-56",
+    "category": "Data Link & Local Switching",
+    "topic": "Address Resolution Protocol (ARP)",
+    "question": "How does Address Resolution Protocol (ARP) map an IPv4 address to a physical MAC address on a local segment?",
+    "answer": "The sending host broadcasts an ARP Request frame to all devices on the local network asking 'Who has IP X.X.X.X? Tell MAC Y:Y:Y:Y'. The host matching that IP responds with a unicast ARP Reply containing its MAC address, which the sender caches in its ARP table.",
+    "laymanExplanation": "ARP is like using a megaphone in a crowded room: 'Who is John Doe? Tell me your ID!' Everyone hears it, but only John Doe replies directly with his ID card. You write it down in your notepad so you don't have to shout again.",
+    "examTip": "Remember transmission types for ARP: ARP Requests are Broadcast (Layer 2 destination FF:FF:FF:FF:FF:FF), while ARP Replies are Unicast."
+  },
+  {
+    "id": "NET-57",
+    "category": "Data Link & Local Switching",
+    "topic": "End-to-End IP vs. Hop-by-Hop MAC Rewriting",
+    "question": "How do source and destination IP addresses compare to source and destination MAC addresses as a packet traverses multiple routed hops?",
+    "answer": "The source and destination IP addresses remain constant end-to-end throughout the entire journey, while the Layer 2 source and destination MAC addresses are stripped and rewritten at every single router hop (decapsulation and re-encapsulation).",
+    "laymanExplanation": "Think of a bucket brigade: the letter inside has the sender's and recipient's names (IP addresses) that never change. But the bucket is handed from person to person along the line, changing hands (MAC addresses) at every single pass.",
+    "examTip": "A device's MAC address never crosses a Layer 3 router boundary. If a packet travels across 5 routers, the Layer 2 frame is stripped and rebuilt 5 times."
+  },
+  {
+    "id": "NET-58",
+    "category": "Network Fundamentals",
+    "topic": "Transmission Modes",
+    "question": "What are the four primary network transmission methods: Unicast, Broadcast, Multicast, and Anycast?",
+    "answer": "1. Unicast: One-to-one transmission. 2. Broadcast: One-to-all hosts on a local subnet. 3. Multicast: One-to-many specific subscribed hosts. 4. Anycast: One-to-nearest host among a group of servers sharing the same IP address.",
+    "laymanExplanation": "Unicast is a private phone call. Broadcast is shouting on a megaphone to the whole building. Multicast is tuning into a specific radio frequency. Anycast is calling 911—you dial one universal number, and it automatically connects to the closest dispatch center.",
+    "examTip": "IPv6 completely eliminates Broadcast transmission and replaces it with Multicast and Anycast mechanisms."
+  },
+  {
+    "id": "NET-59",
+    "category": "Network Services & Protocols",
+    "topic": "Multicast Management via IGMP",
+    "question": "Which protocol is used by IPv4 hosts and local switches to join, maintain, and leave multicast group memberships?",
+    "answer": "Internet Group Management Protocol (IGMP).",
+    "laymanExplanation": "IGMP is the subscription signup sheet. When a computer wants to watch a multicast video stream, it uses IGMP to tell the local switch: 'Put me on the list for this channel so you only forward those packets to my port.'",
+    "examTip": "Switches use 'IGMP Snooping' to ensure multicast traffic is only forwarded out ports that have explicitly subscribed, preventing multicast from flooding the entire switch like a broadcast."
+  },
+  {
+    "id": "NET-60",
+    "category": "Network Troubleshooting",
+    "topic": "Physical Layer (Layer 1) First Rule",
+    "question": "Why is the Physical Layer always verified first during network troubleshooting methodologies?",
+    "answer": "Because higher-layer protocols cannot function if the physical medium (cables, connectors, transceivers, electrical/optical signals) is disconnected or damaged; testing Layer 1 eliminates trivial hardware faults before complex configuration troubleshooting.",
+    "laymanExplanation": "You don't reinstall your car's engine computer if the battery cable is unplugged. Always verify the physical wire is seated, link lights are on, and power is active before checking IP routing and firewall rules.",
+    "examTip": "CompTIA troubleshooting questions often present scenarios where link lights are unlit or amber—the correct initial step is always checking the physical cable, patch cable, or port connection."
+  },
+  {
+    "id": "NET-61",
+    "category": "Data Link & Local Switching",
+    "topic": "Managed Switches & VLANs",
+    "question": "What is the primary operational advantage of a managed switch utilizing Virtual Local Area Networks (VLANs)?",
+    "answer": "VLANs logically segment a single physical switch into multiple isolated broadcast domains, improving security, organization, and traffic management without requiring separate physical switching hardware.",
+    "laymanExplanation": "Instead of buying two physical 24-port switches for HR and Guest Wi-Fi, a managed switch lets you assign ports 1–12 to HR (VLAN 10) and ports 13–24 to Guests (VLAN 20). Devices on port 2 cannot see or talk to devices on port 15.",
+    "examTip": "Traffic between different VLANs cannot communicate at Layer 2 alone; it requires a Layer 3 routing device (such as a router or Layer 3 switch) to route between them."
+  },
+  {
+    "id": "NET-62",
+    "category": "Data Link & Local Switching",
+    "topic": "Ethernet Frame Structure & FCS/CRC",
+    "question": "What are the three fundamental components of an Ethernet frame, and what role does the Frame Check Sequence (FCS) play?",
+    "answer": "An Ethernet frame consists of the Header (source/destination MAC, EtherType), Payload (encapsulated IP packet/data), and Trailer (FCS/CRC). The FCS uses a Cyclic Redundancy Check (CRC) algorithm to verify that data was not corrupted in transit.",
+    "laymanExplanation": "The header is the mailing label, the payload is the cargo, and the trailer is the tamper-evident wax seal. The receiving computer recalculates the math; if the answer doesn't match the trailer exactly, it discards the frame as corrupted.",
+    "examTip": "Layer 2 is the only OSI layer that standardly appends a Trailer (FCS/CRC) to its PDU (Frame) during encapsulation."
+  },
+  {
+    "id": "NET-63",
+    "category": "OSI & TCP/IP Models",
+    "topic": "OSI vs. TCP/IP Model Mapping",
+    "question": "How do the 7 layers of the OSI model map onto the 4 layers of the standard TCP/IP model?",
+    "answer": "OSI Layers 7 (Application), 6 (Presentation), and 5 (Session) map to TCP/IP Application Layer. OSI Layer 4 (Transport) maps to TCP/IP Transport Layer. OSI Layer 3 (Network) maps to TCP/IP Internet Layer. OSI Layers 2 (Data Link) and 1 (Physical) map to TCP/IP Network Access (Link) Layer.",
+    "laymanExplanation": "Programmers bundle the top three layers into 'Application' because software only cares about data delivery. Network engineers separate the bottom layers because hardware, cabling, switching, and routing require separate physical troubleshooting.",
+    "examTip": "Memorize the PDU mapping across both models: Data (Application) -> Segment/Datagram (Transport) -> Packet (Network/Internet) -> Frame (Data Link/Network Access) -> Bits (Physical/Network Access)."
+  },
+  {
+    "id": "NET-64",
+    "category": "Network Services & Protocols",
+    "topic": "DHCP DORA Process",
+    "question": "What is the four-step DORA process used by DHCP to dynamically allocate network parameters to a client, including message transmission types?",
+    "answer": "1. Discover (Client Broadcast), 2. Offer (Server Unicast or Broadcast), 3. Request (Client Broadcast), 4. Acknowledge / ACK (Server Unicast or Broadcast).",
+    "laymanExplanation": "Discover: 'Is there a DHCP server here?' Offer: 'I have IP 192.168.1.15 for you.' Request: 'I accept 192.168.1.15!' (shouted so all servers know you accepted). Acknowledge: 'Confirmed, here is your subnet mask, gateway, and DNS for the next 24 hours.'",
+    "examTip": "The DHCP Request is broadcast so that if multiple DHCP servers made offers, the other servers know their offers were declined and can release those IPs back into their pools."
+  },
+  {
+    "id": "NET-65",
+    "category": "Network Services & Protocols",
+    "topic": "DHCP IP Leases vs. Session Tokens",
+    "question": "Why does a user receiving a previously assigned DHCP lease from another client not inherit that previous client's logged-in application sessions?",
+    "answer": "DHCP operates at the Network/Transport layers managing temporary IP leases, whereas authenticated login states and sessions are managed entirely at the Application Layer (Layer 7) via encrypted session cookies/tokens tied to individual client browsers.",
+    "laymanExplanation": "DHCP is renting a parking spot at a coffee shop—anyone can park in spot #4 next. Being logged into Facebook is having the physical key to your house. The key stays on your device when you leave, regardless of who parks in spot #4 next.",
+    "examTip": "Know layer boundaries: IP addressing is Layer 3; authentication tokens, cookies, and user state live at Layer 7 (Application Layer)."
+  },
+  {
+    "id": "NET-66",
+    "category": "Network Services & Protocols",
+    "topic": "DNS Anycast & Global Resolution",
+    "question": "How do public DNS providers like Google (8.8.8.8) and Cloudflare (1.1.1.1) provide rapid global resolution using Anycast and BGP?",
+    "answer": "Multiple identical DNS server nodes across hundreds of global data centers announce the exact same IP address via Border Gateway Protocol (BGP); internet routers automatically route client queries along the shortest BGP path to the topologically nearest physical node.",
+    "laymanExplanation": "Instead of having one single physical computer in California with IP 8.8.8.8, Google puts identical servers in 100 cities worldwide. When you query 8.8.8.8 from London, the internet router automatically delivers it to the London server.",
+    "examTip": "Anycast allows multiple physical servers to share a single IP address across different geographic locations, providing redundancy and low latency."
+  },
+  {
+    "id": "NET-67",
+    "category": "Network Security & Privacy",
+    "topic": "Encrypted DNS: DoH vs. DoT",
+    "question": "What are the primary differences between DNS over HTTPS (DoH) and DNS over TLS (DoT)?",
+    "answer": "DNS over HTTPS (DoH) encrypts DNS queries inside standard HTTPS traffic over TCP port 443, making DNS lookups indistinguishable from normal web browsing. DNS over TLS (DoT) encrypts DNS lookups directly over dedicated TCP port 853.",
+    "laymanExplanation": "DoT is a dedicated armored security truck for DNS requests (Port 853). DoH hides the DNS request inside a standard Amazon delivery van alongside regular web pages (Port 443), making it impossible for an ISP to single out and block.",
+    "examTip": "Android's 'Private DNS' feature operates using DoT (Port 853). Web browser-based secure DNS settings (Chrome/Firefox) typically use DoH (Port 443)."
+  },
+  {
+    "id": "NET-68",
+    "category": "Network Security & Privacy",
+    "topic": "Encrypted Client Hello (ECH) & DNS Dependency",
+    "question": "What security vulnerability does Encrypted Client Hello (ECH) solve during TLS handshakes, and why does ECH require encrypted DNS to function?",
+    "answer": "ECH encrypts the Server Name Indication (SNI) field in the initial TLS handshake so ISPs cannot see which domain is being visited; it requires encrypted DNS (DoH/DoT) because the client must securely retrieve the server's public encryption keys via DNS records prior to connection.",
+    "laymanExplanation": "Even with HTTPS, the initial greeting historically revealed 'I want to visit example.com' in plain text. ECH encrypts this greeting. However, if your DNS lookup for that site was unencrypted, the ISP already saw the domain name, making ECH pointless.",
+    "examTip": "For complete browser privacy from ISP monitoring: Combine Encrypted DNS (DoH/DoT) with Encrypted Client Hello (ECH) to prevent both DNS sniffing and SNI domain leakage."
+  },
+  {
+    "id": "NET-69",
+    "category": "Network Layer & Addressing",
+    "topic": "Core Address Architecture Specs",
+    "question": "What are the bit lengths, base formats, and standard representations of MAC addresses, IPv4 addresses, IPv6 addresses, and Port numbers?",
+    "answer": "1. MAC: 48 bits (6 bytes), Hexadecimal (00:1A:2B:3C:4D:5E). 2. IPv4: 32 bits (4 bytes), Dotted Decimal (192.168.1.1). 3. IPv6: 128 bits (16 bytes), Hexadecimal hextets (2001:db8::1). 4. Port Number: 16 bits (2 bytes), Decimal (0–65535).",
+    "laymanExplanation": "MAC addresses identify hardware on the local wire. IPv4 and IPv6 identify logical internet locations. Port numbers identify specific software applications running on those devices.",
+    "examTip": "Memorize the bit counts: Port = 16 bits, IPv4 = 32 bits, MAC = 48 bits, IPv6 = 128 bits."
+  },
+  {
+    "id": "NET-70",
+    "category": "Network Layer & Addressing",
+    "topic": "IPv6 Address Compression Rules",
+    "question": "What are the two mandatory syntax rules used to compress full IPv6 addresses?",
+    "answer": "1. Leading zeros within any 16-bit hextet can be omitted (e.g., '0042' becomes '42'). 2. A single contiguous string of one or more all-zero hextets can be replaced with a double colon '::' exactly once per address.",
+    "laymanExplanation": "You can drop leading zeros in any section just like writing '05' as '5'. You can also collapse a large block of consecutive zeros into '::', but only once so the computer knows how many zeros to expand.",
+    "examTip": "A double colon '::' can NEVER appear twice in the same IPv6 address because that creates mathematical ambiguity about how many zero blocks were omitted in each position."
   }
 ]
