@@ -2,6 +2,9 @@
   "name": "wh1t3-r4bb1t",
   "version": "0.1.0",
   "private": true,
+  "allowScripts": {
+    "unrs-resolver": true
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
