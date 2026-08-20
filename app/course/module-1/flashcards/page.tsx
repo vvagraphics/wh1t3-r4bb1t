@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
-// SRS Data Structure
+// 1. SRS Data Structure
 type Flashcard = {
   id: string;
   front: string;
@@ -12,18 +12,24 @@ type Flashcard = {
   ease: number;       
 };
 
-// Default Sec+/Net+ Data
+// Expanded Sec+/Net+ Data for testing limits
 const defaultCards: Flashcard[] = [
   { id: '1', front: 'What port does SSH use?', back: 'Port 22', nextReview: 0, interval: 0, ease: 2.5 },
   { id: '2', front: 'What is the purpose of a SIEM?', back: 'Security Information and Event Management: Log aggregation and threat detection.', nextReview: 0, interval: 0, ease: 2.5 },
   { id: '3', front: 'Define Phishing', back: 'Social engineering attack using deceptive emails to steal credentials.', nextReview: 0, interval: 0, ease: 2.5 },
+  { id: '4', front: 'What port does HTTPS use?', back: 'Port 443', nextReview: 0, interval: 0, ease: 2.5 },
+  { id: '5', front: 'What is a zero-day exploit?', back: 'An attack that targets a previously unknown vulnerability before a patch is available.', nextReview: 0, interval: 0, ease: 2.5 },
+  { id: '6', front: 'Explain the Principle of Least Privilege', back: 'Users should only have the minimum access necessary to perform their job functions.', nextReview: 0, interval: 0, ease: 2.5 },
 ];
 
 export default function FlashcardsPage() {
   const [deck, setDeck] = useState<Flashcard[]>([]);
+  const [studyQueue, setStudyQueue] = useState<Flashcard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [sessionComplete, setSessionComplete] = useState(false);
+  
+  // App States: 'setup' | 'studying' | 'complete'
+  const [appState, setAppState] = useState<'setup' | 'studying' | 'complete'>('setup');
   const [mounted, setMounted] = useState(false);
 
   // Load from LocalStorage
@@ -37,19 +43,43 @@ export default function FlashcardsPage() {
     setMounted(true);
   }, []);
 
-  // Save to LocalStorage
+  // Sync to LocalStorage
   useEffect(() => {
     if (deck.length > 0) {
       localStorage.setItem('matrix_flashcards_mod1', JSON.stringify(deck));
     }
   }, [deck]);
 
+  // Derived Stats
   const dueCards = deck.filter(card => card.nextReview <= Date.now());
-  const currentCard = dueCards[currentIndex];
-
   const masteredCount = deck.filter(c => c.interval > 14).length;
   const learningCount = deck.filter(c => c.interval > 0 && c.interval <= 14).length;
   const newCount = deck.filter(c => c.interval === 0).length;
+
+  const currentCard = studyQueue[currentIndex];
+
+  // Initialize a study session
+  const startSession = (limit: number, cramAll: boolean = false) => {
+    let pool = cramAll ? [...deck] : [...dueCards];
+    
+    // Shuffle the pool for variety
+    pool = pool.sort(() => Math.random() - 0.5);
+    
+    // Apply limit if not "All"
+    if (limit > 0 && pool.length > limit) {
+      pool = pool.slice(0, limit);
+    }
+
+    setStudyQueue(pool);
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    
+    if (pool.length === 0) {
+      setAppState('complete');
+    } else {
+      setAppState('studying');
+    }
+  };
 
   const handleGrade = useCallback((grade: 'again' | 'hard' | 'good' | 'easy') => {
     if (!currentCard) return;
@@ -87,19 +117,18 @@ export default function FlashcardsPage() {
     setDeck(updatedDeck);
     setIsFlipped(false);
 
-    if (currentIndex + 1 >= dueCards.length - 1) {
-      setSessionComplete(true);
+    if (currentIndex + 1 >= studyQueue.length) {
+      setAppState('complete');
     } else {
       setCurrentIndex(prev => prev + 1);
     }
-  }, [deck, currentCard, currentIndex, dueCards.length]);
+  }, [deck, currentCard, currentIndex, studyQueue.length]);
 
   // Hardened Keyboard Bindings
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignore if user is typing in a form field elsewhere
-      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) return;
-      if (sessionComplete || !currentCard) return;
+      if (['INPUT', 'TEXTAREA'].includes((document.activeElement as HTMLElement)?.tagName)) return;
+      if (appState !== 'studying' || !currentCard) return;
 
       if (e.code === 'Space' || e.key === ' ') {
         e.preventDefault();
@@ -117,24 +146,63 @@ export default function FlashcardsPage() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFlipped, sessionComplete, currentCard, handleGrade]);
+  }, [isFlipped, appState, currentCard, handleGrade]);
 
   if (!mounted) return null;
 
-  if (sessionComplete || !currentCard) {
+  // ----------------------------------------------------------------
+  // VIEW: SETUP
+  // ----------------------------------------------------------------
+  if (appState === 'setup') {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-black text-[#00FF41] font-mono p-4">
+        <div className="w-full max-w-2xl border border-[#00FF41] p-6 sm:p-10 bg-[#000500] shadow-[0_0_15px_rgba(0,255,65,0.15)]">
+          <h1 className="text-2xl sm:text-4xl mb-2 tracking-widest font-bold">SYSTEM.INITIALIZE</h1>
+          <p className="text-gray-400 mb-8 text-sm sm:text-base">Select review batch parameters.</p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 mb-8 text-sm sm:text-base border border-gray-800 p-4">
+            <div><span className="text-blue-400">NEW:</span> {newCount}</div>
+            <div><span className="text-yellow-500">LEARNING:</span> {learningCount}</div>
+            <div><span className="text-[#00FF41]">MASTERED:</span> {masteredCount}</div>
+            <div className="ml-auto text-white">TOTAL DUE: {dueCards.length}</div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button onClick={() => startSession(5)} className="p-4 border border-[#00FF41] hover:bg-[#00FF41] hover:text-black transition-colors text-lg">
+              QUICK REVIEW (5)
+            </button>
+            <button onClick={() => startSession(15)} className="p-4 border border-[#00FF41] hover:bg-[#00FF41] hover:text-black transition-colors text-lg">
+              STANDARD (15)
+            </button>
+            <button onClick={() => startSession(0)} className="p-4 border border-[#00FF41] hover:bg-[#00FF41] hover:text-black transition-colors text-lg">
+              ALL DUE ({dueCards.length})
+            </button>
+            <button onClick={() => startSession(0, true)} className="p-4 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black transition-colors text-lg">
+              CRAM OVERRIDE (ALL DECK)
+            </button>
+          </div>
+          
+          <div className="mt-8 text-center">
+            <Link href="/course/module-1" className="text-gray-500 hover:text-[#00FF41] transition-colors text-sm">
+              [ ESC ] CANCEL
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ----------------------------------------------------------------
+  // VIEW: COMPLETE
+  // ----------------------------------------------------------------
+  if (appState === 'complete') {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-black text-[#00FF41] font-mono p-6">
-        <h1 className="text-2xl sm:text-4xl mb-6 tracking-widest text-center" style={{ textShadow: '0 0 10px #00FF41' }}>
-          SYSTEM.REVIEW_COMPLETE
+        <h1 className="text-3xl sm:text-5xl mb-6 tracking-widest text-center" style={{ textShadow: '0 0 10px #00FF41' }}>
+          SESSION.TERMINATED
         </h1>
-        <p className="text-gray-400 mb-8 text-center sm:text-lg">No active threats detected. All modules verified.</p>
+        <p className="text-gray-400 mb-10 text-center sm:text-lg">Queue empty. Data successfully committed to memory.</p>
         
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-10 text-sm sm:text-base border border-[#00FF41] p-6" style={{ backgroundColor: '#001100' }}>
-          <div><span className="text-blue-400">NEW:</span> {newCount}</div>
-          <div><span className="text-yellow-500">LEARNING:</span> {learningCount}</div>
-          <div><span className="text-[#00FF41]">MASTERED:</span> {masteredCount}</div>
-        </div>
-
         <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
           <Link 
             href="/course/module-1"
@@ -143,65 +211,57 @@ export default function FlashcardsPage() {
             [ ESC ] RETURN
           </Link>
           <button 
-            onClick={() => {
-              const resetDeck = deck.map(c => ({...c, nextReview: 0}));
-              setDeck(resetDeck);
-              setSessionComplete(false);
-              setCurrentIndex(0);
-            }}
-            className="flex-1 px-6 py-4 border border-red-500 text-red-500 hover:bg-red-500 hover:text-black transition-colors"
+            onClick={() => setAppState('setup')}
+            className="flex-1 px-6 py-4 border border-[#00FF41] text-[#00FF41] hover:bg-[#00FF41] hover:text-black transition-colors"
           >
-            FORCE RESTART
+            NEW SESSION
           </button>
         </div>
       </div>
     );
   }
 
+  // ----------------------------------------------------------------
+  // VIEW: STUDYING
+  // ----------------------------------------------------------------
   return (
     <div className="flex flex-col items-center min-h-screen bg-black text-[#00FF41] p-4 sm:p-8 font-mono w-full overflow-hidden">
-      
-      <div className="w-full max-w-3xl mx-auto flex flex-col relative z-10 min-h-[85vh]">
+      <div className="w-full max-w-4xl mx-auto flex flex-col relative z-10 min-h-[85vh]">
         
-        {/* Prominent Escape Hatch */}
-        <div className="w-full mb-6 flex justify-between items-center">
-          <Link 
-            href="/course/module-1" 
-            className="inline-block px-4 py-2 border border-gray-700 text-gray-400 hover:border-[#00FF41] hover:text-[#00FF41] transition-colors text-xs sm:text-sm tracking-widest"
+        <div className="w-full mb-4 flex justify-between items-center">
+          <button 
+            onClick={() => setAppState('setup')}
+            className="inline-block px-4 py-2 border border-gray-800 text-gray-500 hover:border-red-500 hover:text-red-500 transition-colors text-xs sm:text-sm tracking-widest"
           >
-            [&lt;] RETURN TO MODULE
-          </Link>
+            [ ABORT SESSION ]
+          </button>
         </div>
 
-        {/* HUD */}
-        <div className="w-full mb-6">
-          <div className="flex justify-between items-end mb-3 text-xs sm:text-sm">
-            <div>
-              <span className="hidden sm:inline-block text-gray-500 mr-2">DECK STATUS //</span>
-              <span className="mr-3"><span className="text-blue-400">N:</span>{newCount}</span>
-              <span className="mr-3"><span className="text-yellow-500">L:</span>{learningCount}</span>
-              <span><span className="text-[#00FF41]">M:</span>{masteredCount}</span>
+        <div className="w-full mb-8">
+          <div className="flex justify-between items-end mb-2 text-xs sm:text-sm">
+            <div className="text-gray-500">
+              MODULE 01 // ACTIVE QUEUE
             </div>
-            <div className="text-right">
-              <span>{currentIndex + 1} / {dueCards.length} DUE</span>
+            <div className="text-right font-bold text-lg">
+              {currentIndex + 1} / {studyQueue.length}
             </div>
           </div>
           <div className="w-full h-1 bg-gray-900 overflow-hidden">
             <div 
               className="h-full bg-[#00FF41] transition-all duration-300" 
-              style={{ width: `${((currentIndex) / dueCards.length) * 100}%`, boxShadow: '0 0 10px #00FF41' }}
+              style={{ width: `${((currentIndex) / studyQueue.length) * 100}%`, boxShadow: '0 0 10px #00FF41' }}
             ></div>
           </div>
         </div>
 
-        {/* Rigid Card Container */}
+        {/* BULLETPROOF CARD LAYOUT */}
         <div 
           onClick={() => setIsFlipped(!isFlipped)}
-          className="relative w-full flex-1 min-h-[350px] sm:min-h-[450px] cursor-pointer mt-4"
-          style={{ perspective: '1000px' }}
+          className="relative w-full flex-1 min-h-[400px] sm:min-h-[500px] cursor-pointer"
+          style={{ perspective: '1200px' }}
         >
           <div 
-            className="w-full h-full absolute transition-transform duration-500"
+            className="w-full h-full absolute transition-transform duration-700"
             style={{ 
               transformStyle: 'preserve-3d', 
               transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)' 
@@ -210,28 +270,32 @@ export default function FlashcardsPage() {
             
             {/* Front */}
             <div 
-              className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-12 border-2 border-[#00FF41] hover:shadow-[0_0_30px_rgba(0,255,65,0.2)] transition-shadow"
-              style={{ backfaceVisibility: 'hidden', backgroundColor: '#000000' }}
+              className="absolute inset-0 flex flex-col justify-between p-6 sm:p-12 border-2 border-[#00FF41] bg-black hover:shadow-[0_0_30px_rgba(0,255,65,0.2)] transition-shadow"
+              style={{ backfaceVisibility: 'hidden' }}
             >
-              <h2 className="text-2xl sm:text-4xl text-[#00FF41] text-center leading-relaxed font-bold">
+              <div className="h-8"></div> {/* Spacer to push text to center */}
+              
+              <h2 className="text-3xl sm:text-5xl text-[#00FF41] text-center leading-tight font-bold">
                 {currentCard.front}
               </h2>
-              <div className="absolute bottom-6 text-xs sm:text-sm text-gray-500 animate-pulse tracking-widest">
-                [ PRESS SPACE OR TAP TO DECRYPT ]
+              
+              <div className="h-8 flex items-end justify-center">
+                <span className="text-xs sm:text-sm text-gray-600 animate-pulse tracking-widest">
+                  [ PRESS SPACE TO DECRYPT ]
+                </span>
               </div>
             </div>
 
             {/* Back */}
             <div 
-              className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-12 border-2 border-[#00FF41]"
+              className="absolute inset-0 flex flex-col justify-center items-center p-6 sm:p-12 border-2 border-[#00FF41] bg-[#000a00]"
               style={{ 
                 backfaceVisibility: 'hidden', 
                 transform: 'rotateY(180deg)',
-                backgroundColor: '#001100',
-                boxShadow: '0 0 25px rgba(0,255,65,0.2)' 
+                boxShadow: '0 0 25px rgba(0,255,65,0.15)' 
               }}
             >
-              <h2 className="text-xl sm:text-3xl text-[#00FF41] text-center leading-relaxed">
+              <h2 className="text-xl sm:text-4xl text-[#00FF41] text-center leading-relaxed font-light">
                 {currentCard.back}
               </h2>
             </div>
@@ -239,36 +303,29 @@ export default function FlashcardsPage() {
           </div>
         </div>
 
-        {/* SRS Controls */}
-        <div className={`mt-8 w-full transition-all duration-300 ${isFlipped ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
-            <button onClick={(e) => { e.stopPropagation(); handleGrade('again'); }} className="py-4 border border-red-500 text-red-500 hover:bg-red-500 hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-col items-center" style={{ backgroundColor: '#000000' }}>
-              <span>[1] Again</span>
-              <span className="text-[10px] sm:text-xs opacity-70 mt-1">Forgot It (&lt;1m)</span>
+        {/* SRS Controls Container */}
+        <div className="mt-6 min-h-[100px]">
+          <div className={`w-full grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 transition-all duration-300 ${isFlipped ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+            <button onClick={(e) => { e.stopPropagation(); handleGrade('again'); }} className="py-4 border border-gray-800 text-red-500 hover:bg-red-500 hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-row sm:flex-col justify-between sm:justify-center items-center px-4 bg-black">
+              <span>[1] AGAIN</span>
+              <span className="text-xs opacity-70 sm:mt-1">&lt; 1m</span>
             </button>
             
-            <button onClick={(e) => { e.stopPropagation(); handleGrade('hard'); }} className="py-4 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-col items-center" style={{ backgroundColor: '#000000' }}>
-              <span>[2] Hard</span>
-              <span className="text-[10px] sm:text-xs opacity-70 mt-1">Barely Knew It</span>
+            <button onClick={(e) => { e.stopPropagation(); handleGrade('hard'); }} className="py-4 border border-gray-800 text-yellow-500 hover:bg-yellow-500 hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-row sm:flex-col justify-between sm:justify-center items-center px-4 bg-black">
+              <span>[2] HARD</span>
+              <span className="text-xs opacity-70 sm:mt-1">10m</span>
             </button>
             
-            <button onClick={(e) => { e.stopPropagation(); handleGrade('good'); }} className="py-4 border border-[#00FF41] text-[#00FF41] hover:bg-[#00FF41] hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-col items-center shadow-[0_0_10px_rgba(0,255,65,0.1)]" style={{ backgroundColor: '#001100' }}>
-              <span>[3] Good</span>
-              <span className="text-[10px] sm:text-xs opacity-70 mt-1">Remembered</span>
+            <button onClick={(e) => { e.stopPropagation(); handleGrade('good'); }} className="py-4 border border-[#00FF41] text-[#00FF41] hover:bg-[#00FF41] hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-row sm:flex-col justify-between sm:justify-center items-center px-4 bg-[#001100] shadow-[0_0_10px_rgba(0,255,65,0.1)]">
+              <span>[3] GOOD</span>
+              <span className="text-xs opacity-70 sm:mt-1">1d</span>
             </button>
             
-            <button onClick={(e) => { e.stopPropagation(); handleGrade('easy'); }} className="py-4 border border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-col items-center" style={{ backgroundColor: '#000000' }}>
-              <span>[4] Easy</span>
-              <span className="text-[10px] sm:text-xs opacity-70 mt-1">Too Simple</span>
+            <button onClick={(e) => { e.stopPropagation(); handleGrade('easy'); }} className="py-4 border border-gray-800 text-blue-400 hover:bg-blue-400 hover:text-black uppercase text-sm sm:text-base tracking-widest transition-colors flex flex-row sm:flex-col justify-between sm:justify-center items-center px-4 bg-black">
+              <span>[4] EASY</span>
+              <span className="text-xs opacity-70 sm:mt-1">4d</span>
             </button>
           </div>
-        </div>
-
-        {/* Terminal Instructions Overlay */}
-        <div className="mt-8 text-center border-t border-gray-800 pt-6">
-          <p className="text-gray-500 text-xs sm:text-sm font-mono tracking-widest">
-            SYSTEM.CONTROLS: <span className="text-gray-300">[SPACE]</span> = FLIP CARD &nbsp;//&nbsp; <span className="text-gray-300">[1-4]</span> = GRADE RECALL
-          </p>
         </div>
 
       </div>
