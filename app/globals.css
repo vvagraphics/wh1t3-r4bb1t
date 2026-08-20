@@ -17,20 +17,26 @@ body {
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
 }
-.perspective-1000 {
-  perspective: 1000px;
-}
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-.backface-hidden {
-  backface-visibility: hidden;
-}
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-.text-shadow-neon {
-  text-shadow:
-    0 0 5px #00ff41,
-    0 0 10px #00ff41;
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+  }
+  .text-shadow-neon {
+    text-shadow:
+      0 0 5px var(--matrix-green),
+      0 0 10px var(--matrix-green);
+  }
 }
