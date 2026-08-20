@@ -3,22 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: #030303; /* Deep dark void */
-  --foreground: #e0e0e0; /* Off-white text */
+  --background: #030303;
+  --foreground: #e0e0e0;
   --matrix-green: #00ff41;
   --matrix-dark-green: #008f11;
+  --matrix-red: #ff3333;
 }
 
+/* 1. Global Reset & Theme Enforcement */
 body {
   background-color: var(--background);
   color: var(--foreground);
-  /* Forces the hacker terminal aesthetic globally */
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
+  overflow-x: hidden;
+}
+
+/* 2. Global Link Immunity */
+a,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  color: inherit;
+  text-decoration: none;
 }
 
 @layer utilities {
+  /* 3. 3D Card Utilities */
   .perspective-1000 {
     perspective: 1000px;
   }
@@ -34,9 +47,45 @@ body {
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);
   }
+
+  /* 4. Glow Utilities */
   .text-shadow-neon {
     text-shadow:
       0 0 5px var(--matrix-green),
       0 0 10px var(--matrix-green);
+  }
+
+  /* 5. Clean Translucent Glow Button */
+  .matrix-glow-btn {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--matrix-green) !important;
+    border: 1px solid var(--matrix-green);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: all 0.15s ease-in-out;
+    text-decoration: none !important;
+  }
+
+  .matrix-glow-btn:hover {
+    background-color: var(--matrix-green) !important;
+    color: #000000 !important;
+    box-shadow:
+      0 0 25px rgba(0, 255, 65, 0.8),
+      0 0 40px rgba(0, 255, 65, 0.4) !important;
+    transform: translateY(1px);
+    text-shadow: none !important;
+  }
+
+  .matrix-glow-btn:active {
+    transform: translateY(3px);
+  }
+
+  /* Red Alert Status Tag */
+  .badge-red-online {
+    color: #ff3333 !important;
+    border: 1px solid #ff3333;
+    background-color: rgba(255, 51, 51, 0.15);
+    box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
   }
 }

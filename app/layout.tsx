@@ -13,8 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen flex flex-col bg-[#030303] text-[#e0e0e0]">
-        {/* We will add a global navigation bar here later if needed */}
+      {/* suppressHydrationWarning prevents Grammarly/extensions from crashing the dev server */}
+      <body 
+        className="antialiased min-h-screen flex flex-col bg-black text-[#e0e0e0]"
+        suppressHydrationWarning
+      >
         <main className="flex-grow">
           {children}
         </main>
