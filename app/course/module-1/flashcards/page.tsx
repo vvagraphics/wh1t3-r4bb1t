@@ -3,12 +3,23 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import flashcardsData from '@/src/data/module1-cards.json'; 
 
+// Define TypeScript Interface for Flashcards
+interface Flashcard {
+  id: string | number;
+  category: string;
+  topic: string;
+  question: string;
+  answer: string;
+  laymanExplanation: string;
+  examTip: string;
+}
+
 export default function Flashcards() {
-  const [mode, setMode] = useState('menu');
-  const [deck, setDeck] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [hardCards, setHardCards] = useState([]);
+  const [mode, setMode] = useState<'menu' | 'study'>('menu');
+  const [deck, setDeck] = useState<Flashcard[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [hardCards, setHardCards] = useState<(string | number)[]>([]);
 
   // Load saved "Hard" cards from Local Storage on mount
   useEffect(() => {
@@ -19,7 +30,7 @@ export default function Flashcards() {
   }, []);
 
   // --- DECK GENERATION LOGIC ---
-  const shuffleArray = (array) => {
+  const shuffleArray = (array: Flashcard[]) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -29,14 +40,14 @@ export default function Flashcards() {
   };
 
   const startRandomAll = () => {
-    setDeck(shuffleArray(flashcardsData));
+    setDeck(shuffleArray(flashcardsData as Flashcard[]));
     setCurrentIndex(0);
     setIsFlipped(false);
     setMode('study');
   };
 
   const startBatchOf15 = () => {
-    const shuffled = shuffleArray(flashcardsData);
+    const shuffled = shuffleArray(flashcardsData as Flashcard[]);
     setDeck(shuffled.slice(0, 15));
     setCurrentIndex(0);
     setIsFlipped(false);
@@ -44,7 +55,7 @@ export default function Flashcards() {
   };
 
   const startReviewHard = () => {
-    const reviewDeck = flashcardsData.filter(card => hardCards.includes(card.id));
+    const reviewDeck = (flashcardsData as Flashcard[]).filter(card => hardCards.includes(card.id));
     if (reviewDeck.length === 0) {
       alert(">> NO CORRUPTED DATA FOUND. KEEP STUDYING.");
       return;
@@ -56,7 +67,7 @@ export default function Flashcards() {
   };
 
   // --- CARD INTERACTION LOGIC ---
-  const handleRating = (rating) => {
+  const handleRating = (rating: string) => {
     const currentCardId = deck[currentIndex].id;
     let updatedHardCards = [...hardCards];
 
@@ -166,12 +177,12 @@ export default function Flashcards() {
           {/* Front Face (Question) */}
           <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] flex flex-col justify-between p-6 md:p-10 border-2 border-green-500 bg-black shadow-[0_0_20px_rgba(0,255,65,0.2)] rounded-sm">
             <div className="text-xs md:text-sm text-green-700 uppercase tracking-widest w-full text-left">
-              {currentCard.category} // {currentCard.topic}
+              {currentCard?.category} // {currentCard?.topic}
             </div>
             
             <div className="flex-1 flex items-center justify-center">
               <h2 className="text-2xl md:text-4xl font-bold leading-relaxed text-shadow-neon text-center">
-                {currentCard.question}
+                {currentCard?.question}
               </h2>
             </div>
 
@@ -183,17 +194,17 @@ export default function Flashcards() {
           {/* Back Face (Answer & Context) */}
           <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col p-6 md:p-8 border-2 border-green-400 bg-[#021002] shadow-[0_0_25px_rgba(0,255,65,0.4)] rounded-sm overflow-y-auto custom-scrollbar">
             <h2 className="text-xl md:text-3xl font-bold text-white mb-8 text-center mt-4">
-              {currentCard.answer}
+              {currentCard?.answer}
             </h2>
             
             <div className="w-full space-y-6 text-sm md:text-lg text-green-300 text-left bg-black p-6 border border-green-900 rounded-sm">
               <p className="break-words">
                 <span className="font-bold text-green-500 block mb-2">&gt; LAYMAN_TERMS:</span> 
-                {currentCard.laymanExplanation}
+                {currentCard?.laymanExplanation}
               </p>
               <p className="break-words">
                 <span className="font-bold text-green-500 block mb-2">&gt; EXAM_OVERRIDE:</span> 
-                {currentCard.examTip}
+                {currentCard?.examTip}
               </p>
             </div>
           </div>
