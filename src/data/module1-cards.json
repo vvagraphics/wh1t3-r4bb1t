@@ -629,4 +629,274 @@
     "laymanExplanation": "You can drop leading zeros in any section just like writing '05' as '5'. You can also collapse a large block of consecutive zeros into '::', but only once so the computer knows how many zeros to expand.",
     "examTip": "A double colon '::' can NEVER appear twice in the same IPv6 address because that creates mathematical ambiguity about how many zero blocks were omitted in each position."
   }
+  {
+    "id": "NET-71",
+    "category": "Addressing & Subnetting",
+    "topic": "Point-to-Point Links (/31 Subnets)",
+    "question": "What is the purpose of an RFC 3021 /31 subnet mask, and how does it handle Network and Broadcast addresses?",
+    "answer": "A /31 subnet mask (255.255.255.254) provides exactly 2 usable IP addresses specifically for point-to-point router links by eliminating the requirement for dedicated Network and Broadcast addresses.",
+    "laymanExplanation": "Normally, every room wastes two chairs: one for the nameplate on the door (Network ID) and one for the megaphone (Broadcast). A /31 is a direct walkie-talkie between two guards—there is no audience to shout to, so both chairs can be sat in.",
+    "examTip": "Whenever an exam scenario mentions conserving IPv4 space on dedicated router-to-router connections, select /31 (RFC 3021)."
+  },
+  {
+    "id": "NET-72",
+    "category": "Addressing & Subnetting",
+    "topic": "Host Routes & Loopbacks (/32 Subnets)",
+    "question": "What does a /32 subnet mask represent, and where is it commonly implemented?",
+    "answer": "A /32 mask (255.255.255.255) designates a single host route with 0 host bits, commonly used for virtual loopback interface identifiers on routers and pin-point firewall rules.",
+    "laymanExplanation": "A /32 is like writing someone's exact social security number instead of their zip code. It points to one specific machine and nobody else.",
+    "examTip": "A /32 leaves zero host bits ($32 - 32 = 0$), so $2^0 = 1$ single IP address."
+  },
+  {
+    "id": "NET-73",
+    "category": "Network Security & Architecture",
+    "topic": "Forward vs. Reverse Proxies",
+    "question": "What is the operational distinction between a Forward Proxy and a Reverse Proxy?",
+    "answer": "A Forward Proxy sits in front of internal clients to inspect, filter, and mask outbound traffic to the internet. A Reverse Proxy sits in front of backend web servers to handle inbound traffic, load balancing, SSL termination, and WAF protection.",
+    "laymanExplanation": "A Forward Proxy is a hall monitor checking students trying to leave school (outbound). A Reverse Proxy is a bouncer checking IDs and searching bags at the nightclub entrance (inbound).",
+    "examTip": "Both operate at OSI Layer 7 (Application). Forward = Client protection; Reverse = Server protection."
+  },
+  {
+    "id": "NET-74",
+    "category": "Network Security & Architecture",
+    "topic": "Transparent vs. Non-Transparent Proxies",
+    "question": "What is the difference between a Transparent Proxy and a Non-Transparent Proxy?",
+    "answer": "A Transparent Proxy intercepts client traffic at the network routing layer without client software configuration. A Non-Transparent Proxy requires the client application or OS to be explicitly configured with the proxy IP and port.",
+    "laymanExplanation": "Transparent is an airport security conveyor belt in the basement you never see. Non-Transparent is walking through a physical TSA checkpoint line where you must show your boarding pass.",
+    "examTip": "Malware attempting outbound C2 connections often fails in strictly non-transparent proxy enterprise environments unless it inherits system proxy settings."
+  },
+  {
+    "id": "NET-75",
+    "category": "Wireless Security",
+    "topic": "WEP Cryptographic Vulnerabilities",
+    "question": "What specific cryptographic flaws make Wired Equivalent Privacy (WEP) insecure?",
+    "answer": "WEP relies on weak RC4 stream encryption with a small 24-bit Initialization Vector (IV) that forces frequent key reuse, alongside unencrypted CRC-32 integrity checks that allow packet tampering.",
+    "laymanExplanation": "WEP is like a combination lock with only a few dial options. On a busy network, it repeats codes so rapidly that free tools can crack the master Wi-Fi password in under 5 minutes.",
+    "examTip": "Never choose WEP on any modern CompTIA exam unless the question specifically asks for an obsolete/insecure legacy standard."
+  },
+  {
+    "id": "NET-76",
+    "category": "Wireless Security",
+    "topic": "WPA Enterprise EAP Hierarchy",
+    "question": "How do LEAP, PEAP, and EAP-TLS differ in wireless authentication security?",
+    "answer": "LEAP is deprecated and vulnerable to dictionary attacks. PEAP creates an encrypted TLS tunnel using a server-side certificate to protect inner password exchanges. EAP-TLS provides mutual authentication requiring digital certificates on both the server and client.",
+    "laymanExplanation": "LEAP is shouting a password in a paper bag. PEAP is whispering your password through an armored bank tube. EAP-TLS is both of you presenting verified government passports—no passwords needed.",
+    "examTip": "EAP-TLS is the most secure wireless standard because it requires PKI certificates on both ends (client + server)."
+  },
+  {
+    "id": "NET-77",
+    "category": "Wireless Security",
+    "topic": "802.11 Deauthentication Attacks & PMF",
+    "question": "How do 802.11 Deauthentication/Disassociation attacks work, and what technology mitigates them?",
+    "answer": "Attackers spoof the access point's MAC address and broadcast unencrypted Layer 2 management frames to disconnect clients. IEEE 802.11w Protected Management Frames (PMF) encrypts and signs these frames to prevent spoofing.",
+    "laymanExplanation": "A prankster yelling 'Fire!' through a megaphone in a building. Everyone leaves. 802.11w is putting a tamper-proof digital signature on emergency alarms so fake calls are ignored.",
+    "examTip": "WPA3 mandates 802.11w Protected Management Frames (PMF) by default."
+  },
+  {
+    "id": "NET-78",
+    "category": "VPN & Tunneling",
+    "topic": "IPsec AH vs. ESP",
+    "question": "What is the primary difference in security services provided by IPsec Authentication Header (AH) vs. Encapsulating Security Payload (ESP)?",
+    "answer": "AH (IP Protocol 51) provides data integrity, origin authentication, and replay protection WITHOUT encryption. ESP (IP Protocol 50) provides confidentiality (encryption) along with optional authentication and integrity.",
+    "laymanExplanation": "AH is a clear plastic postcard with a tamper-evident wax seal (everyone can read it, but no one can alter it). ESP is an armored, opaque steel lockbox (keeps contents secret and safe).",
+    "examTip": "If an exam question asks for 'integrity without encryption', choose AH. If it mentions 'confidentiality', choose ESP."
+  },
+  {
+    "id": "NET-79",
+    "category": "VPN & Tunneling",
+    "topic": "IPsec Transport Mode vs. Tunnel Mode",
+    "question": "How do IPsec Transport Mode and Tunnel Mode differ regarding packet encapsulation?",
+    "answer": "Transport Mode encrypts only the payload while preserving the original IP header (used for Host-to-Host). Tunnel Mode encrypts the entire original packet (payload and header) and attaches a brand-new outer IP header (used for Site-to-Site and Client-to-Site).",
+    "laymanExplanation": "Transport mode puts a locked letter into an envelope with the original recipient's address on it. Tunnel mode takes the entire envelope and puts it inside a second courier pouch addressed to a central mail depot.",
+    "examTip": "Site-to-Site and Remote Access VPNs almost exclusively use IPsec Tunnel Mode."
+  },
+  {
+    "id": "NET-80",
+    "category": "VPN & Tunneling",
+    "topic": "IKE Modes and Negotiation Ports",
+    "question": "What port does Internet Key Exchange (IKE) operate on, and what is the security risk of IKE Aggressive Mode?",
+    "answer": "IKE operates over UDP port 500. Aggressive Mode compresses key negotiation into 3 packets for speed, but transmits the identity and authentication hash in cleartext, exposing Pre-Shared Keys (PSKs) to offline dictionary cracking.",
+    "laymanExplanation": "Main Mode (6 packets) checks identities inside a private room behind closed doors. Aggressive Mode (3 packets) flashes an ID card in the open lobby where anyone can snap a photo.",
+    "examTip": "Always use IKE Main Mode or upgrade to IKEv2 to prevent pre-shared key hash capture."
+  },
+  {
+    "id": "NET-81",
+    "category": "VPN & Tunneling",
+    "topic": "NAT Traversal (NAT-T)",
+    "question": "Why is NAT Traversal (NAT-T) required for IPsec, and what port does it use?",
+    "answer": "NAT-T encapsulates raw IPsec ESP packets inside UDP port 4500 datagrams to allow encrypted traffic to traverse intermediate SOHO routers and firewalls performing NAT.",
+    "laymanExplanation": "Raw ESP packets do not have TCP/UDP port numbers, so home routers (which use ports for PAT) get confused and drop them. NAT-T wraps the packet in a standard UDP 4500 package so home routers can forward it smoothly.",
+    "examTip": "Remember the port pair for IPsec: IKE uses UDP 500; NAT-T uses UDP 4500."
+  },
+  {
+    "id": "NET-82",
+    "category": "Layer 2 Switching & VLANs",
+    "topic": "VLAN Hopping (Double-Tagging)",
+    "question": "How does a Double-Tagging VLAN hopping attack work, and what is the primary mitigation?",
+    "answer": "An attacker on the native VLAN crafts an Ethernet frame with two 802.1Q tags. The first switch strips the outer native tag and forwards the inner tag across the trunk, causing the second switch to deliver the frame to a victim VLAN. Mitigation: Change the native VLAN away from default VLAN 1 to an unused VLAN ID and force native VLAN tagging.",
+    "laymanExplanation": "It's like nested envelopes. The first mailroom strips the outer envelope (native VLAN) and forwards the inner letter straight to the CEO's desk (target VLAN) without inspecting it.",
+    "examTip": "Double-tagging only works if the attacker is physically connected to an access port configured with the trunk's Native VLAN."
+  },
+  {
+    "id": "NET-83",
+    "category": "Layer 2 Switching & VLANs",
+    "topic": "VXLAN Architecture",
+    "question": "What is VXLAN (Virtual eXtensible LAN) and what limitation of 802.1Q does it solve?",
+    "answer": "VXLAN (RFC 7348) encapsulates Layer 2 Ethernet frames inside Layer 3 UDP packets using a 24-bit VXLAN Network Identifier (VNI), scaling network segmentation from 802.1Q's 4,094 VLAN limit to over 16 million virtual segments.",
+    "laymanExplanation": "Instead of being trapped by local city road limits (4,094 VLANs), VXLAN loads the local delivery van into a cargo airplane and flies it across the world over standard IP networks.",
+    "examTip": "VXLAN uses UDP port 4789 and supports up to 16,777,216 logical networks."
+  },
+  {
+    "id": "NET-84",
+    "category": "Cryptography",
+    "topic": "Symmetric vs. Asymmetric Encryption",
+    "question": "What is the primary difference between Symmetric and Asymmetric encryption?",
+    "answer": "Symmetric encryption uses a single shared secret key for both encryption and decryption (fast, bulk data). Asymmetric encryption uses a mathematically linked public/private key pair (slower, solves key distribution, provides digital signatures).",
+    "laymanExplanation": "Symmetric is a physical padlock where everyone shares duplicate keys. Asymmetric is a postal drop box: anyone can drop mail through the slot (Public Key), but only the postal worker has the key to open the back door (Private Key).",
+    "examTip": "Real-world systems use hybrid cryptography: Asymmetric (RSA/ECC) securely exchanges a session key, then Symmetric (AES) encrypts the bulk payload."
+  },
+  {
+    "id": "NET-85",
+    "category": "Cryptography",
+    "topic": "Block Cipher Modes: ECB Vulnerability",
+    "question": "Why is Electronic Codebook (ECB) mode considered cryptographically insecure for structured data?",
+    "answer": "ECB mode encrypts identical 64-bit or 128-bit plaintext blocks into identical ciphertext blocks, preserving data patterns and structural outlines (the 'ECB Penguin' effect).",
+    "laymanExplanation": "ECB is like using a rubber stamp. Every time you stamp the word 'SECRET', the mark looks identical, allowing observers to see the shapes of images and documents without the key.",
+    "examTip": "Never select ECB mode in secure design questions. Choose CBC for storage or GCM for active network streams."
+  },
+  {
+    "id": "NET-86",
+    "category": "Cryptography",
+    "topic": "Galois/Counter Mode (GCM)",
+    "question": "Why is AES-GCM preferred in modern secure protocols like TLS 1.3 and IPsec?",
+    "answer": "AES-GCM is an Authenticated Encryption with Associated Data (AEAD) mode that delivers both high-speed stream encryption and cryptographic integrity/authenticity verification in a single hardware-accelerated pass.",
+    "laymanExplanation": "AES-GCM puts your items into an armored transport box and slaps an unforgeable digital tamper seal on it at the exact same time.",
+    "examTip": "GCM provides both Confidentiality AND Integrity simultaneously."
+  },
+  {
+    "id": "NET-87",
+    "category": "Cryptography",
+    "topic": "Diffie-Hellman Key Exchange & PFS",
+    "question": "How does Diffie-Hellman (DH) operate, and what is Perfect Forward Secrecy (PFS)?",
+    "answer": "Diffie-Hellman allows two parties to generate a shared symmetric secret over an untrusted channel using public mathematical values. Perfect Forward Secrecy (PFS) uses ephemeral session keys (DHE/ECDHE) so compromising a server's long-term private key cannot decrypt historical sessions.",
+    "laymanExplanation": "DH is like mixing secret paint colors publicly to arrive at the exact same final shade without revealing your recipe. PFS changes the hotel room keycard code for every guest so a stolen master key cannot unlock past visits.",
+    "examTip": "Diffie-Hellman on its own only does Key Exchange—it does NOT encrypt data or create digital signatures."
+  },
+  {
+    "id": "NET-88",
+    "category": "Identity & Access Management",
+    "topic": "Kerberos Authentication Mechanics",
+    "question": "How does Kerberos (TCP/UDP Port 88) authenticate users across an enterprise domain?",
+    "answer": "Kerberos uses a central Key Distribution Center (KDC) composed of an Authentication Server (AS) and Ticket Granting Server (TGS) to issue time-stamped cryptographic tickets (TGT and Service Tickets), avoiding the transmission of plaintext passwords across the network.",
+    "laymanExplanation": "An amusement park ticket booth. You show your ID once at the entrance to buy a wristband (TGT). You then show that wristband to ride operators (service tickets) without pulling your wallet out every time.",
+    "examTip": "Kerberos relies heavily on synchronized time (NTP); clock skews greater than 5 minutes break ticket validation."
+  },
+  {
+    "id": "NET-89",
+    "category": "Identity & Access Management",
+    "topic": "OAuth 2.0 vs. SAML / OpenID",
+    "question": "What is the functional difference between OAuth 2.0 and SAML/OpenID Connect?",
+    "answer": "OAuth 2.0 is strictly an Authorization framework that issues scoped tokens (delegating permissions). SAML and OpenID Connect (OIDC) are Authentication protocols used to verify identity and enable Single Sign-On (SSO).",
+    "laymanExplanation": "OAuth is giving a hotel valet key to park your car (authorization to drive, but not open the trunk). SAML/OIDC is showing your passport at the border (proving who you are).",
+    "examTip": "OAuth = Authorization (permissions); SAML / OIDC = Authentication (identity)."
+  },
+  {
+    "id": "NET-90",
+    "category": "Identity & Access Management",
+    "topic": "PAP vs. CHAP Handshake",
+    "question": "Why is Password Authentication Protocol (PAP) deprecated in favor of Challenge Handshake Authentication Protocol (CHAP)?",
+    "answer": "PAP sends usernames and passwords across the link in unencrypted plaintext. CHAP uses a three-way challenge-response handshake that hashes a random challenge with the user's password, never exposing the plaintext password on the wire.",
+    "laymanExplanation": "PAP is shouting your PIN across the room. CHAP is solving a math riddle using your secret PIN without ever saying the number out loud.",
+    "examTip": "MS-CHAPv2 was Microsoft's implementation, but is vulnerable to dictionary cracking if captured; modern networks use EAP-TLS."
+  },
+  {
+    "id": "NET-91",
+    "category": "Network Troubleshooting & Recon",
+    "topic": "TTL OS Fingerprinting",
+    "question": "How can an analyst infer a remote host's operating system by inspecting packet TTL values?",
+    "answer": "Operating systems use distinct initial TTL values: Linux/macOS defaults to 64, Windows defaults to 128, and Cisco/network appliances default to 255. The formula $Hops = InitialTTL - CapturedTTL$ reveals path length.",
+    "laymanExplanation": "If you catch a ping response with $TTL=122$, it likely started at $128$ (Windows) and passed through 6 routers ($128 - 6 = 122$).",
+    "examTip": "TTL values near 64 = Linux/Unix; TTL values near 128 = Windows."
+  },
+  {
+    "id": "NET-92",
+    "category": "Network Troubleshooting & Recon",
+    "topic": "IP ID Sequential Counters & Dual-Homed Hosts",
+    "question": "What security information is leaked when an operating system utilizes sequential IP Identification (IP ID) counters?",
+    "answer": "Sequential IP ID counters allow remote observers to correlate traffic from different IP addresses back to a single physical multi-homed host and enable legacy side-channel attacks like the Nmap Idle Scan (-sI).",
+    "laymanExplanation": "If letters arrive from two different return addresses but have sequential invoice stamp numbers (1337, 1338, 1339), they are coming from the exact same desk.",
+    "examTip": "Modern operating systems randomize IP ID fields to mitigate host fingerprinting."
+  },
+  {
+    "id": "NET-93",
+    "category": "Network Troubleshooting & Recon",
+    "topic": "IP Record-Route (RR) Option",
+    "question": "What is the maximum number of hops the IP Record-Route option (ping -R) can capture, and why?",
+    "answer": "A maximum of 9 router hops, because the IPv4 header Options field has a hard limit of 40 bytes (3 bytes of overhead plus 4 bytes per recorded IPv4 address).",
+    "laymanExplanation": "A travel passport with only 9 blank stamp boxes. Once the 9th border guard stamps it, there is physically no more room on the card.",
+    "examTip": "Enterprise firewalls frequently drop packets with IP options enabled due to CPU load and topology leakage risks."
+  },
+  {
+    "id": "NET-94",
+    "category": "Standards & Governance",
+    "topic": "RFC Lifecycle & Immutability",
+    "question": "How does the Internet Engineering Task Force (IETF) update an existing Request for Comments (RFC)?",
+    "answer": "RFCs are completely immutable and never updated in place; when a standard changes, a brand-new sequential RFC number is published that formally 'Obsoletes' or 'Updates' the previous document.",
+    "laymanExplanation": "Like Supreme Court rulings or official laws. You cannot erase an old law book; you pass a new amendment that references and supersedes the old one.",
+    "examTip": "Example: RFC 791 (IPv4 core), RFC 1918 (Private IP space), RFC 3021 (/31 subnetting)."
+  },
+  {
+    "id": "NET-95",
+    "category": "Standards & Governance",
+    "topic": "CFAA and Active Defense Boundaries",
+    "question": "Under the Computer Fraud and Abuse Act (CFAA), what is the legal dividing line for defensive cybersecurity teams?",
+    "answer": "Defenders are strictly limited to actions within networks they own or are authorized to defend (e.g., honeypots, sinkholes). Counter-offensive actions ('hacking back') into external attacker infrastructure without legal authorization is a federal crime.",
+    "laymanExplanation": "You can install security cameras, locks, and alarms in your home, but you cannot chase the burglar down the street and break into their house.",
+    "examTip": "CFAA (18 U.S.C. § 1030) prohibits unauthorized access to protected computers, making offensive retaliation illegal for commercial enterprises."
+  },
+  {
+    "id": "NET-96",
+    "category": "Standards & Governance",
+    "topic": "CSIRTs, SOCs, and FIRST Ethics",
+    "question": "What are the core roles of CSIRTs, SOCs, and the FIRST organization in cybersecurity?",
+    "answer": "A SOC provides continuous real-time monitoring and log analysis. A CSIRT coordinates containment and forensic remediation during active incidents. FIRST is the global incident response consortium that establishes ethical guidelines like the EthicsfIRST code of conduct.",
+    "laymanExplanation": "The SOC is the security guard watching live CCTV screens. The CSIRT is the specialized HazMat containment crew called when a breach occurs. FIRST is the international standards association establishing ethical guidelines.",
+    "examTip": "NIST SP 800-61 provides the standard 4-step Incident Response Lifecycle: Preparation -> Detection & Analysis -> Containment, Eradication & Recovery -> Post-Incident Activity."
+  },
+  {
+    "id": "NET-97",
+    "category": "Network Architecture & Routing",
+    "topic": "The 'Splinternet' and Global IPv4 Space",
+    "question": "Does a 'National Internet' (like China's Great Firewall) use a separate duplicate pool of IPv4 addresses?",
+    "answer": "No; all nations share the single global pool of ~4.29 billion IPv4 addresses managed by IANA. National internets enforce border filtering, BGP route manipulation, and deep packet inspection at sovereign boundary gateways.",
+    "laymanExplanation": "There is only one global road system. A national firewall is simply a massive border checkpoint on the highway that refuses entry or exit to specific destinations (like Google or YouTube).",
+    "examTip": "BGP (Border Gateway Protocol) operates at Layer 4 (TCP 179) and governs routing between Autonomous Systems (AS) worldwide."
+  },
+  {
+    "id": "NET-98",
+    "category": "Network Services & Security",
+    "topic": "Voice over IP (VoIP) & SIP Reconnaissance",
+    "question": "What ports do SIP and RTP use in VoIP architecture, and how do attackers enumerate users?",
+    "answer": "SIP uses TCP/UDP 5060 (5061 for TLS) for call signaling/setup; RTP uses dynamic UDP ports for media audio streams. Attackers send crafted SIP OPTIONS/INVITE requests to harvest different status codes (e.g., 200 OK vs 404 Not Found) to enumerate valid employee extensions.",
+    "laymanExplanation": "SIP is dialing the phone, hearing the ring, and picking up. RTP is the actual voice talking across the wire. SIP enumeration is dialing every extension to see which ones ring.",
+    "examTip": "Isolate voice systems on a dedicated Voice VLAN and enforce SIP over TLS (port 5061) to block cleartext eavesdropping."
+  },
+  {
+    "id": "NET-99",
+    "category": "Network Services & Security",
+    "topic": "Cisco IP Phone Configuration Disclosure",
+    "question": "How do misconfigured TFTP servers expose VoIP networks to reconnaissance?",
+    "answer": "Cisco IP phones download unauthenticated XML configuration files named SEP<MAC_ADDRESS>.cnf from TFTP servers (UDP 69) on boot, which can leak internal IP subnets, VLAN IDs, firmware versions, and call manager credentials.",
+    "laymanExplanation": "When a desk phone boots, it asks the TFTP server for its configuration file by name. If the server is public, anyone can download that file and read the company's internal phone network blueprint.",
+    "examTip": "TFTP operates over UDP 69 and has zero built-in authentication or encryption."
+  },
+  {
+    "id": "NET-100",
+    "category": "Network Security & Architecture",
+    "topic": "Defense in Depth: 5 Core Enterprise Subnets",
+    "question": "What are the 5 foundational enterprise subnets required for strict defense-in-depth isolation?",
+    "answer": "1. DMZ (Public-facing web/mail servers), 2. Client Workstations (User laptops/PCs), 3. Management / Out-of-Band (Switches, routers, firewalls), 4. VoIP / Voice VLAN (Phones and call managers), 5. Printer / IoT VLAN (Isolated peripheral devices).",
+    "laymanExplanation": "A high-security building: 1. Lobby (DMZ for visitors), 2. Employee desks (Workstations), 3. Maintenance access tunnels (Admin/Network gear), 4. Intercom lines (VoIP), 5. Utility storage room (Printers/IoT).",
+    "examTip": "Printers and IoT gear should never have unrestricted outbound internet access or raw SMB (port 445) reachability back to client hosts."
+  }
 ]
