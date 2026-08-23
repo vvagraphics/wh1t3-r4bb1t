@@ -628,7 +628,7 @@
     "answer": "1. Leading zeros within any 16-bit hextet can be omitted (e.g., '0042' becomes '42'). 2. A single contiguous string of one or more all-zero hextets can be replaced with a double colon '::' exactly once per address.",
     "laymanExplanation": "You can drop leading zeros in any section just like writing '05' as '5'. You can also collapse a large block of consecutive zeros into '::', but only once so the computer knows how many zeros to expand.",
     "examTip": "A double colon '::' can NEVER appear twice in the same IPv6 address because that creates mathematical ambiguity about how many zero blocks were omitted in each position."
-  }
+  },
   {
     "id": "NET-71",
     "category": "Addressing & Subnetting",
