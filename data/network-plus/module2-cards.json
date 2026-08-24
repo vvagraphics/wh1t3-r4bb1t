@@ -1,0 +1,182 @@
+[
+  {
+    "id": "ADDR-01",
+    "category": "MAC Addressing",
+    "topic": "MAC Address Architecture & Layer 2 Identification",
+    "question": "What is the total bit length, hexadecimal structure, and primary Layer 2 purpose of an Ethernet Media Access Control (MAC) address?",
+    "answer": "A MAC address is a 48-bit (6-byte) physical Layer 2 address represented as 12 hexadecimal digits (e.g., 00:1A:2B:3C:4D:5E) burned into a Network Interface Card (NIC) to uniquely identify devices on a local network segment.",
+    "laymanExplanation": "Think of a MAC address as a computer's permanent government-issued Social Security Number or vehicle VIN—it is stamped directly onto the hardware at the factory so local switches know who is who on the local street.",
+    "examTip": "48 bits total = 6 bytes / octets = 12 hex characters. Remember that MAC addresses function strictly at OSI Layer 2 and never cross a Layer 3 router boundary."
+  },
+  {
+    "id": "ADDR-02",
+    "category": "MAC Addressing",
+    "topic": "OUI vs. NIC-Specific Identifier",
+    "question": "How is a standard 48-bit MAC address divided between the vendor identifier and the device-specific serial identifier?",
+    "answer": "The first 24 bits (3 bytes) represent the Organizationally Unique Identifier (OUI) assigned by the IEEE to the hardware manufacturer, while the last 24 bits (3 bytes) represent the vendor-assigned Network Interface Controller (NIC) serial identifier.",
+    "laymanExplanation": "In an International Standard Book Number (ISBN), the first digits identify the publisher and the last digits identify the specific book. The OUI identifies who built the network card (e.g., Intel, Apple, Cisco), and the remaining bytes are that card's unique serial number.",
+    "examTip": "CompTIA frequently asks which portion indicates the manufacturer. OUI = First 24 bits (3 bytes / 6 hex digits); Device Serial = Last 24 bits (3 bytes / 6 hex digits)."
+  },
+  {
+    "id": "ADDR-03",
+    "category": "IPv4 Structure",
+    "topic": "IPv4 Bit Length & Octet Range",
+    "question": "What is the bit length, formatting convention, and numerical range of each octet in an IPv4 address?",
+    "answer": "An IPv4 address consists of 32 bits arranged into four 8-bit sections called octets, formatted in dotted-decimal notation (e.g., 192.168.1.1). Each octet spans a decimal range from 0 to 255 (2^8 = 256 discrete values per octet).",
+    "laymanExplanation": "Think of an IPv4 address like a 4-part telephone number separated by periods. Because each section is an 8-slot binary container, the lowest score you can write is 0 and the highest full score is 255.",
+    "examTip": "If an exam question presents an IP like 192.168.1.256, it is mathematically invalid because an 8-bit octet cannot exceed 255."
+  },
+  {
+    "id": "ADDR-04",
+    "category": "8-Bit Binary Conversion",
+    "topic": "Positional Base-2 Octet Values",
+    "question": "What are the positional values of the 8 bits in an IPv4 octet from Most Significant Bit (MSB) to Least Significant Bit (LSB)?",
+    "answer": "From left (MSB) to right (LSB), the 8 positional values are: 128, 64, 32, 16, 8, 4, 2, and 1.",
+    "laymanExplanation": "Picture a cash register with 8 bill slots: $128, $64, $32, $16, $8, $4, $2, and $1. Setting a binary bit to '1' turns that slot ON to count the cash; setting it to '0' leaves that slot empty.",
+    "examTip": "Memorize this doubling scale cold: 1 -> 2 -> 4 -> 8 -> 16 -> 32 -> 64 -> 128. The sum of all 8 bits enabled (11111111) is 255."
+  },
+  {
+    "id": "ADDR-05",
+    "category": "8-Bit Binary Conversion",
+    "topic": "Binary to Decimal Conversion",
+    "question": "What is the decimal equivalent of the binary octet 11001010?",
+    "answer": "202 (Calculated by summing active positional bits: 128 + 64 + 0 + 0 + 8 + 0 + 2 + 0 = 202).",
+    "laymanExplanation": "Turn on the active power switches: flip on the 128, 64, 8, and 2 switches. Add them together ($128 + 64 + 8 + 2$) to get your total bill of 202.",
+    "examTip": "Write out the 128-64-32-16-8-4-2-1 table on your exam scratch paper immediately during the tutorial phase to speed up subnetting math."
+  },
+  {
+    "id": "ADDR-06",
+    "category": "Subnetting Fundamentals",
+    "topic": "Network ID vs. Host ID & Subnet Masks",
+    "question": "What are the two functional components of an IP address, and how does a subnet mask define their boundary?",
+    "answer": "Every IP address contains a Network ID (identifying the specific network segment) and a Host ID (identifying the individual device on that segment). The Subnet Mask uses a contiguous string of binary 1s to identify the Network portion and contiguous binary 0s to identify the Host portion.",
+    "laymanExplanation": "In the street address '742 Evergreen Terrace', 'Evergreen Terrace' is the Network ID that brings the mail truck to the right neighborhood, while '742' is the Host ID identifying the specific house. The subnet mask is the legal boundary line telling the post office where the street name ends and the house number begins.",
+    "examTip": "A valid subnet mask must ALWAYS consist of contiguous 1s followed by contiguous 0s. A mask like 255.255.240.0 is valid (11111111.11111111.11110000.00000000), but a broken mask with interspersed 1s and 0s is illegal."
+  },
+  {
+    "id": "ADDR-07",
+    "category": "Legacy Classful Addressing",
+    "topic": "Class A, B, and C Allocations",
+    "question": "What are the first octet decimal ranges and default subnet masks for legacy IPv4 Classes A, B, and C?",
+    "answer": "Class A: 1–126 (Default mask: 255.0.0.0 or /8)\nClass B: 128–191 (Default mask: 255.255.0.0 or /16)\nClass C: 192–223 (Default mask: 255.255.255.0 or /24)\n(Note: The 127.0.0.0/8 block is reserved for loopback testing).",
+    "laymanExplanation": "In the early internet, address blocks were handed out like fixed t-shirt sizes: Class A was Extra-Large (huge corporations/governments with millions of hosts), Class B was Medium (universities/large companies), and Class C was Small (small offices with up to 254 hosts).",
+    "examTip": "Class A high-order bit starts with '0', Class B with '10', and Class C with '110'. 127.x.x.x is missing from the assignable list because it is hard-reserved for local loopback."
+  },
+  {
+    "id": "ADDR-08",
+    "category": "Legacy Classful Addressing",
+    "topic": "Class D and Class E Designations",
+    "question": "What are the first octet boundaries and standardized operational purposes of Class D and Class E IPv4 blocks?",
+    "answer": "Class D: 224–239 (Reserved for Multicast group communications)\nClass E: 240–255 (Reserved by IETF for Experimental and research purposes).",
+    "laymanExplanation": "Class D is a radio channel reserved for group broadcasts where many devices tune in at once. Class E is a locked research lab storage locker that was set aside for future scientific experiments and never released for public host assignment.",
+    "examTip": "Neither Class D nor Class E can be assigned to an individual host's network adapter. If an exam scenario asks for a multicast stream address, choose an IP in the 224.0.0.0–239.255.255.255 range."
+  },
+  {
+    "id": "ADDR-09",
+    "category": "Private IPv4 Addressing",
+    "topic": "RFC 1918 Private Ranges",
+    "question": "What are the three RFC 1918 private IPv4 address allocations, their prefix lengths, and their routability on the public Internet?",
+    "answer": "1. 10.0.0.0 to 10.255.255.255 (10.0.0.0/8)\n2. 172.16.0.0 to 172.31.255.255 (172.16.0.0/12)\n3. 192.168.0.0 to 192.168.255.255 (192.168.0.0/16)\nThese addresses are non-routable across public Internet backbones and must undergo Network Address Translation (NAT) to access external WAN resources.",
+    "laymanExplanation": "RFC 1918 addresses are like internal office extension numbers (Ext. 101, 102). Anyone in the world can reuse extension 101 inside their own private building, but you cannot dial Ext. 101 directly from an outside city payphone without passing through the main building receptionist (NAT).",
+    "examTip": "Memorize the 172 range carefully: it is 172.16.0.0 through 172.31.255.255 (/12). Addresses like 172.15.x.x or 172.32.x.x are PUBLIC routable IPs."
+  },
+  {
+    "id": "ADDR-10",
+    "category": "IPv4 Limitations & Exhaustion",
+    "topic": "IPv4 Address Space Depletion & Mitigations",
+    "question": "What is the theoretical total capacity of IPv4, and what primary architectural stopgaps delayed its exhaustion prior to IPv6 adoption?",
+    "answer": "IPv4 has a maximum mathematical space of 2^32 (~4.29 billion) addresses. The engineering mechanisms deployed to stave off exhaustion include RFC 1918 private addressing paired with NAT/PAT, Classless Inter-Domain Routing (CIDR), and Variable Length Subnet Masking (VLSM).",
+    "laymanExplanation": "When IPv4 was created, 4.3 billion numbers seemed infinite. But with billions of smartphones, PCs, and smart lightbulbs joining the web, the phonebook ran out of room. NAT and subnetting acted like apartment building mailrooms, letting thousands of devices share a single public address until the massive new IPv6 postal system could take over.",
+    "examTip": "CIDR and NAT/PAT were temporary fixes that extended IPv4 life for decades; IPv6 is the permanent, long-term structural solution."
+  },
+  {
+    "id": "ADDR-11",
+    "category": "IPv6 Architecture",
+    "topic": "IPv6 Structure & Elimination of Broadcasts",
+    "question": "What is the bit length, notation format, and fundamental traffic handling shift in IPv6 compared to IPv4?",
+    "answer": "IPv6 is 128 bits long, segmented into 8 hextets (16-bit blocks) of 4 hexadecimal characters separated by colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334). IPv6 completely eliminates Layer 3 broadcast transmissions, replacing them with Multicast and Anycast.",
+    "laymanExplanation": "IPv6 is a colossal upgrade from a 32-digit string to a 128-digit string (providing $2^{128}$ or 340 undecillion addresses). It also bans 'broadcast shouting' through megaphones across the whole network—devices now send targeted multicast invites to only the specific devices that care.",
+    "examTip": "There is NO broadcast in IPv6. Whenever a question asks how IPv6 replicates ARP broadcast functions, the answer is Neighbor Discovery Protocol (NDP) using ICMPv6 Multicast."
+  },
+  {
+    "id": "ADDR-12",
+    "category": "IPv6 Architecture",
+    "topic": "IPv6 Address Compression Rules",
+    "question": "What are the two mandatory syntax rules used to compress an IPv6 address, and what is the strict restriction on the double colon (::)?",
+    "answer": "Rule 1: Leading zeros within any 16-bit hextet can be dropped (e.g., :0042: becomes :42:; :0000: becomes :0:).\nRule 2: A single contiguous block of one or more all-zero hextets can be replaced with a double colon (::).\nRestriction: The double colon (::) can only be used ONCE per address to prevent mathematical ambiguity when reconstructing the 8 hextets.",
+    "laymanExplanation": "You can drop the leading zero on your alarm clock (writing '08:00' as '8:00'). You can also squeeze a long line of zero rooms into a double colon '::', but you can only do it once; otherwise, the mail carrier wouldn't know how many missing zero rooms were squished in each spot.",
+    "examTip": "If an exam question shows an address with two double colons (e.g., 2001::db8::1), it is syntactically INVALID. Trailing zeros within a hextet (e.g., 0800 -> 800) cannot be dropped."
+  },
+  {
+    "id": "ADDR-13",
+    "category": "IPv6 Architecture",
+    "topic": "IPv6 Compression Application",
+    "question": "Compress the following IPv6 address to its shortest legal RFC-compliant representation: 2001:0db8:0000:0000:0008:0800:200c:417a",
+    "answer": "2001:db8::8:800:200c:417a",
+    "laymanExplanation": "1. Strip the leading zero in '0db8' to get 'db8'.\n2. Compress the two consecutive zero blocks ':0000:0000:' into '::'.\n3. Strip leading zeros in '0008' to get '8'.\n4. Leave '0800' as '800' (never drop trailing zeros).\nResult: 2001:db8::8:800:200c:417a.",
+    "examTip": "Be vigilant on trailing zeros: '0800' becomes '800', NOT '8'. Dropping trailing zeros changes the actual mathematical value of the hextet."
+  },
+  {
+    "id": "ADDR-14",
+    "category": "IPv6 Scopes",
+    "topic": "IPv6 Scope Types & Prefix Identifiers",
+    "question": "What are the prefix identifiers and functional roles of Global Unicast (GUA), Link-Local, Unique Local (ULA), and Multicast IPv6 scopes?",
+    "answer": "1. Global Unicast (GUA): Globally routable public addresses on the Internet (Prefix: 2000::/3).\n2. Link-Local: Non-routable auto-configured addresses for intra-subnet communication on the local link (Prefix: fe80::/10).\n3. Unique Local (ULA): Private enterprise-routed addresses equivalent to RFC 1918 (Prefix: fc00::/7 or fd00::/8).\n4. Multicast: Group delivery targeting subscribed endpoints (Prefix: ff00::/8).",
+    "laymanExplanation": "GUA (2000::/3) is your international passport. Link-Local (fe80::/10) is talking to people in the same room without needing an internet connection. ULA (fc00/fd00::) is an internal corporate badge system. Multicast (ff00::/8) is a community radio station.",
+    "examTip": "Every IPv6-enabled interface automatically generates a Link-Local address (fe80::/10) upon boot. Link-local packets are dropped by routers and will never leave the local switch segment."
+  },
+  {
+    "id": "ADDR-15",
+    "category": "Subnetting Fundamentals",
+    "topic": "CIDR & Variable Length Subnet Masking (VLSM)",
+    "question": "How does CIDR prefix notation replace classful boundaries, and how does VLSM optimize IP address allocation?",
+    "answer": "CIDR (Classless Inter-Domain Routing) uses slash prefix notation (e.g., /28) to define the exact count of network bits without adhering to rigid Class A, B, or C rules. VLSM (Variable Length Subnet Masking) applies CIDR principles recursively, allowing subnets of different prefix sizes (e.g., /30 for point-to-point router links and /24 for user LANs) within the same overall address space to eliminate address waste.",
+    "laymanExplanation": "Classful addressing forced you to buy a 254-seat bus even if you only needed to drive 2 people down the road. CIDR and VLSM allow you to order custom vehicles—a 2-seater sports car (/30 or /31) for two connected routers and a 250-seat bus (/24) for the main office floor.",
+    "examTip": "VLSM is 'subnetting a subnet'. It requires a classless routing protocol like OSPF, EIGRP, or BGP that advertises subnet masks alongside network prefixes."
+  },
+  {
+    "id": "ADDR-16",
+    "category": "Network Address Translation",
+    "topic": "NAT Implementation Types (Static vs. Dynamic vs. PAT)",
+    "question": "What are the architectural and operational differences between Static NAT, Dynamic NAT, and Port Address Translation (PAT / NAT Overload)?",
+    "answer": "1. Static NAT: A permanent 1:1 mapping between one private IP and one public IP (used for hosting internal web/mail servers publicly).\n2. Dynamic NAT: A dynamic many:many mapping where private hosts lease a public IP from a pre-allocated pool on a first-come, first-served basis.\n3. PAT (NAT Overload): A many:1 mapping where hundreds of private hosts share a single public IP, distinguished by unique Layer 4 source port numbers.",
+    "laymanExplanation": "Static NAT is assigning a dedicated VIP parking spot for the company CEO. Dynamic NAT is a small first-come visitor parking lot where you grab an open pass until the lot fills up. PAT is a shared carpool van where everyone rides under one license plate, but wears name tags (port numbers) to separate their luggage.",
+    "examTip": "PAT is the standard mechanism deployed on consumer home Wi-Fi routers and enterprise egress firewalls. In CompTIA questions, PAT is formally referred to as 'NAT Overload'."
+  },
+  {
+    "id": "ADDR-17",
+    "category": "Network Layer & Routing",
+    "topic": "Default Gateway Role & Packet Forwarding Logic",
+    "question": "How does a host decide whether to deliver a frame locally or route it through the Default Gateway?",
+    "answer": "The host performs a bitwise AND operation between the destination IP and its own subnet mask. If the destination Network ID matches the local subnet, the host uses ARP/NDP to deliver directly to the target's MAC address at Layer 2. If the destination Network ID is remote, the host encapsulates the packet inside a Layer 2 frame addressed to the Default Gateway's MAC address.",
+    "laymanExplanation": "When you send a letter, you look at the zip code. If it's your own town, you walk over and drop it in your neighbor's mailbox yourself (Layer 2 local ARP). If it's another city or country, you drop it into the local post office drop box (the Default Gateway) and let them route it across the highway.",
+    "examTip": "When a packet leaves for a remote network, the Destination IP remains the ultimate remote server, but the Destination MAC is rewritten to the Default Gateway's interface MAC."
+  },
+  {
+    "id": "ADDR-18",
+    "category": "HTB Network Foundations",
+    "topic": "Nodes, Communication Links, and Data Sharing",
+    "question": "In foundational networking architecture, what defines a Node, a Communication Link, and the ultimate objective of Data Sharing?",
+    "answer": "A Node is any addressable active electronic device (endpoints like PCs/servers, or network devices like switches/routers) capable of creating, receiving, or forwarding data. A Communication Link is the physical (copper twisted-pair, fiber optic) or wireless (Wi-Fi, RF, microwave) transmission path connecting nodes. Data Sharing is the primary objective—enabling distributed nodes to exchange files, access centralized databases, run remote services, and synchronize state.",
+    "laymanExplanation": "Nodes are the cities and towns on a map. Communication links are the asphalt highways and bridges connecting them. Data sharing is the actual shipping freight and trucks moving goods between those towns.",
+    "examTip": "HTB networking foundations categorize nodes into 'End Systems' (hosts/servers initiating/consuming payloads) and 'Intermediate Nodes' (switches/routers switching/forwarding frames and packets)."
+  },
+  {
+    "id": "ADDR-19",
+    "category": "HTB Network Foundations",
+    "topic": "LAN vs. WAN Characteristics",
+    "question": "What are the core technical differences between a Local Area Network (LAN) and a Wide Area Network (WAN) regarding geography, infrastructure ownership, and speed?",
+    "answer": "A LAN covers a restricted geographic footprint (a room, office suite, or building), is entirely owned and administered by a private organization, and delivers high bandwidth (1–10 Gbps) with ultra-low latency. A WAN spans expansive geographic distances (across cities, states, or continents), relies on leased telecommunications carriers / ISP public infrastructure, and typically exhibits higher latency and recurring bandwidth costs.",
+    "laymanExplanation": "A LAN is the internal hallway inside your corporate headquarters that you own, clean, and run down freely. A WAN is the interstate highway system owned by the government and toll companies that you pay to use to reach offices in other states.",
+    "examTip": "LANs are owned and managed end-to-end internally by your team. WAN connections traverse third-party telecommunication providers and carrier boundaries requiring Layer 3 edge routing."
+  },
+  {
+    "id": "ADDR-20",
+    "category": "HTB Network Foundations",
+    "topic": "Modem Modulation/Demodulation Role",
+    "question": "What is the primary physical layer bridging function of a Modem (Modulator/Demodulator) when connecting a local LAN to an ISP?",
+    "answer": "A modem modulates outgoing digital square-wave pulses from local networking equipment into analog waveforms suitable for transmission across ISP carrier media (such as cable TV coax, DSL phone lines, or radio frequencies), and demodulates incoming analog signals back into pure digital bitstreams for local router processing.",
+    "laymanExplanation": "Computers only speak in digital 1s and 0s (clicks and taps), while older ISP cables and radio waves carry smooth analog waves (like musical tones). A modem acts as the simultaneous language translator, turning digital keystrokes into analog soundwaves to travel down the road, and decoding incoming soundwaves back into digital code.",
+    "examTip": "Modem = MOdulator / DEModulator. Modems bridge the physical Layer 1 signaling gap between ISP delivery media and your Layer 2/3 router edge."
+  }
+]
