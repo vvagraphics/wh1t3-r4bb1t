@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function MediaArchivesPage() {
   return (
     <div className="min-h-screen p-8 max-w-6xl mx-auto flex flex-col">
-      <Link href="/course/module-1" className="text-[#00ff41] hover:underline text-sm mb-8">
+      <Link href="/course/network-plus/module-1" className="text-[#00ff41] hover:underline text-sm mb-8">
         &lt; Back to Module 01 Hub
       </Link>
 

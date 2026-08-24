@@ -105,7 +105,7 @@ export default function Flashcards() {
         {/* Navigation */}
         <div className="w-full max-w-md mb-8 flex justify-start">
           <Link 
-            href="/course/module-1" 
+            href="/course/network-plus/module-1" 
             className="text-green-600 hover:text-green-400 font-bold text-sm transition-colors flex items-center gap-2"
           >
             &lt; RETURN_TO_DIRECTORY
