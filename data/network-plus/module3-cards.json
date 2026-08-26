@@ -1,0 +1,137 @@
+[
+  {
+    "id": "m3-01",
+    "category": "Copper Network Media",
+    "topic": "UTP Standards & Categories",
+    "question": "What are the standard UTP cable categories, and what is their maximum distance limitation for 10 Gbps and 1 Gbps data transmission?",
+    "answer": "Unshielded Twisted Pair (UTP) categories include Cat5e (up to 1 Gbps), Cat6 (up to 1 Gbps up to 100 meters, or 10 Gbps up to 55 meters), and Cat6a (up to 10 Gbps up to 100 meters). The maximum standard distance limitation for all these horizontal cabling runs is 100 meters (328 ft).",
+    "laymanExplanation": "Think of UTP categories like highway speed limits: Cat5e is a standard two-lane road, Cat6 is a wider road that can handle faster traffic for shorter bursts, and Cat6a is a high-speed multi-lane freeway that maintains top speeds over the full 100-meter distance.",
+    "examTip": "Remember the golden 100-meter rule for copper Ethernet. Also remember that Cat6 can achieve 10 Gbps, but only up to 55 meters; you need Cat6a to push 10 Gbps the full 100 meters."
+  },
+  {
+    "id": "m3-02",
+    "category": "Copper Network Media",
+    "topic": "STP Shielding & EMI Environments",
+    "question": "What is the primary structural difference and use case for Shielded Twisted Pair (STP) cabling compared to UTP?",
+    "answer": "STP includes additional foil shielding and/or a braided metallic outer layer wrapped around the twisted pairs to block external electrical noise, whereas UTP relies solely on wire twisting. STP's primary use case is in high electromagnetic interference (EMI) environments, such as heavy manufacturing floors or near high-voltage electrical lines.",
+    "laymanExplanation": "If UTP is a standard plastic-jacketed wire, STP is that same wire wrapped in heavy-duty aluminum foil armor. It acts like a protective shield blocking outside static and electrical interference from messing up your data signals.",
+    "examTip": "STP requires proper grounding at both ends of the run to drain off intercepted EMI safely; otherwise, the metallic shield can act like an antenna and pick up even more noise."
+  },
+  {
+    "id": "m3-03",
+    "category": "Fiber Optic Media & Connectors",
+    "topic": "Single-Mode vs. Multimodem Fiber Characteristics",
+    "question": "What are the core size, light source, and distance differences between Single-Mode Fiber (SMF) and Multimode Fiber (MMF)?",
+    "answer": "Single-Mode Fiber (SMF) uses a narrow core (~9 µm), is driven by high-powered lasers, features a yellow jacket, and supports long-distance WAN/campus connectivity spanning kilometers. Multimode Fiber (MMF) uses a larger core size (50 or 62.5 µm), is driven by LEDs or VCSELs, features orange or aqua jackets, and supports shorter distances for building backbones.",
+    "laymanExplanation": "Single-Mode is like a laser beam shooting down a microscopic straw, traveling miles without spreading out. Multimode is like a flashlight shining down a wider tube, where light bounces off the walls, making it great for high-speed runs inside a single building but limiting its total distance.",
+    "examTip": "SMF = Laser, narrow core, long distance, yellow jacket. MMF = LED/VCSEL, wider core, shorter distance, orange/aqua jacket."
+  },
+  {
+    "id": "m3-04",
+    "category": "Fiber Optic Media & Connectors",
+    "topic": "Fiber & Copper Connectors",
+    "question": "What are the physical characteristics and primary deployments for RJ-45, LC, SC, and MPO connectors?",
+    "answer": "RJ-45 is an 8-pin modular connector for copper UTP/STP cabling. LC (Lucent Connector) is a small form-factor, duplex fiber connector common in high-density data centers. SC (Subscriber Connector) is a square, push-pull snap-in fiber connector valued for durability. MPO (Multi-Fiber Push-On) is a high-density multi-fiber connector used for parallel optics.",
+    "laymanExplanation": "Think of RJ-45 as the standard telephone-style plastic plug on your computer network cable. LC is the tiny snap-in plug used in tight data center racks, SC is the chunky square snap plug, and MPO is a heavy-duty multi-lane plug that packs dozens of fiber strands into a single connector.",
+    "examTip": "LC is known as the 'Little Connector' or 'Lucent Connector' and is easily identified by its small form factor and duplex clip. MPO handles multiple fibers at once for high-speed trunk lines."
+  },
+  {
+    "id": "m3-05",
+    "category": "Network Topologies",
+    "topic": "Mesh Topology & Redundancy Formula",
+    "question": "What is the primary advantage of a Full Mesh topology, and what mathematical formula calculates the number of required links?",
+    "answer": "A Full Mesh topology provides maximum redundancy, absolute fault tolerance, and zero single points of failure (SPOF) because every node has a direct dedicated link to every other node. The required number of physical links is calculated using the formula $n(n-1)/2$, where $n$ is the number of nodes.",
+    "laymanExplanation": "A full mesh network is like a room where everyone is directly holding hands with everyone else. If any one person lets go, everyone else can still reach each other instantly, but it gets very expensive and cluttered as you add more people.",
+    "examTip": "Memorize the formula $n(n-1)/2$ for full mesh links. While it provides ultimate resilience, it becomes cost-prohibitive and unmanageable as the node count grows."
+  },
+  {
+    "id": "m3-06",
+    "category": "Network Topologies",
+    "topic": "Modern Data Center & WAN Architectures",
+    "question": "How do Spine-Leaf and Hub-and-Spoke architectures structure modern enterprise networks?",
+    "answer": "Spine-Leaf is a 2-tier data center architecture featuring ToR leaf switches and a spine backbone, guaranteeing predictable 2-hop East-West latency using ECMP routing. Hub-and-Spoke is a WAN architecture connecting branch office spokes to a central hub, offering cost-effective management while creating a centralized traffic bottleneck.",
+    "laymanExplanation": "Spine-leaf is like a grid of multi-lane highways in a city where any server can talk to any other server with maximum efficiency and only two hops. Hub-and-spoke is like an airline hub where all regional flights must fly into one central airport before heading out to another city.",
+    "examTip": "Spine-leaf eliminates oversubscription bottlenecks in data centers by ensuring every leaf switch connects to every spine switch. Hub-and-spoke is a classic WAN pattern for connecting remote branches back to corporate headquarters."
+  },
+  {
+    "id": "m3-07",
+    "category": "Network Devices",
+    "topic": "Layer 2 Switching vs. Layer 3 Routing",
+    "question": "What are the core forwarding mechanisms that separate Layer 2 switches from Layer 3 routers?",
+    "answer": "Layer 2 switches make forwarding decisions based on physical MAC addresses using Content-Addressable Memory (CAM) table lookups within a local broadcast domain. Layer 3 routers make forwarding decisions based on logical IP addresses, routing packets across different subnets and functioning as WAN gateways.",
+    "laymanExplanation": "A Layer 2 switch is like an internal office mailroom sorting letters based on employee desk nameplates (MAC addresses). A router is like the regional post office sorting packages based on city and state street addresses (IP addresses) to cross town lines.",
+    "examTip": "Switches operate within the same local network segment and drop or forward frames based on MACs. Routers break up broadcast domains and move packets across disparate network boundaries."
+  },
+  {
+    "id": "m3-08",
+    "category": "Network Devices",
+    "topic": "Switching Vulnerabilities & Loop Prevention",
+    "question": "What is MAC flooding, and how do managed switches mitigate layer 2 issues like switching loops?",
+    "answer": "MAC flooding overwhelms a switch's CAM table with fake source MAC addresses, forcing the switch to fail-open and behave like an unmanaged hub, broadcasting all traffic out every port. Managed switches mitigate physical loops using Spanning Tree Protocol (STP implementations like 802.1D or 802.1w) to block redundant paths.",
+    "laymanExplanation": "MAC flooding is like overwhelming a security guard's visitor logbook with fake names until they stop checking IDs and just let everyone walk through every door. STP is the safety protocol that stops security staff from accidentally building an endless revolving door corridor that traps people in a loop.",
+    "examTip": "When a switch's CAM table fills up during a MAC flooding attack, it fails-open into a broadcast hub mode, exposing all local traffic to passive sniffers."
+  },
+  {
+    "id": "m3-09",
+    "category": "Network Devices",
+    "topic": "Stateless vs. Stateful Firewalls & NGFW",
+    "question": "What operational differences distinguish stateless packet filtering, stateful inspection firewalls, and Next-Generation Firewalls (NGFW)?",
+    "answer": "Stateless firewalls inspect packet headers (Layer 3/4) against static ACL rules without session memory. Stateful inspection firewalls track TCP handshakes and session states in a state table, automatically permitting return traffic for established connections. Next-Generation Firewalls (NGFW) add Layer 7 application inspection, Deep Packet Inspection (DPI), integrated IDS/IPS, and SSL/TLS decryption.",
+    "laymanExplanation": "A stateless firewall is like a security guard checking ID cards against a strict guest list for every single individual step someone takes. A stateful firewall remembers that you already checked in and let you back through the gate automatically. An NGFW is an advanced security checkpoint that opens your bags, inspects the contents of your packages, and checks what app you are running on your phone.",
+    "examTip": "If a firewall rule automatically allows return traffic for an active TCP session without a manual outbound rule, it is utilizing stateful inspection session tracking."
+  },
+  {
+    "id": "m3-10",
+    "category": "Wireless Access Points & Wi-Fi Standards",
+    "topic": "Standalone vs. Controller-Based WAPs",
+    "question": "What are the operational differences between Standalone (Fat) Access Points and Controller-Based (Thin) Access Points?",
+    "answer": "Standalone (Fat) Access Points are autonomous devices that require individual, manual configuration and management for every unit. Controller-Based (Thin) Access Points rely on a centralized Wireless LAN Controller (WLC) using protocols like CAPWAP for automated provisioning, centralized management, and dynamic RF tuning.",
+    "laymanExplanation": "Fat APs are like a row of individual smart bulbs that you have to climb a ladder to program one by one. Thin APs are dumb bulbs controlled by a central smart home hub that adjusts colors, brightness, and settings for all of them simultaneously.",
+    "examTip": "Enterprise environments overwhelmingly prefer controller-based thin APs because configuration changes, firmware updates, and radio frequency management happen centrally via the WLC."
+  },
+  {
+    "id": "m3-11",
+    "category": "Wireless Access Points & Wi-Fi Standards",
+    "topic": "Wireless Roaming & Security Threats",
+    "question": "What cell overlap percentage is recommended for smooth wireless roaming, and what are the security risks of open Wi-Fi networks?",
+    "answer": "A cell overlap of approximately 15% to 20% is recommended between adjacent WAP coverage cells to ensure seamless roaming without dropped connections, supported by standards like 802.11k/v/r. Open Wi-Fi networks expose clients to severe security risks including packet sniffing, ARP poisoning, and Evil Twin rogue access point attacks.",
+    "laymanExplanation": "Wireless roaming cell overlap is like walking between cellular towers or Wi-Fi zones: you want the signals to overlap nicely so your call or data session hands off smoothly without dropping. Open Wi-Fi is like shouting your personal secrets in a crowded public park where anyone can listen in or pretend to be your trusted friend (Evil Twin).",
+    "examTip": "Evil Twin attacks involve an attacker spinning up a rogue WAP broadcasting the exact same SSID as a legitimate public hotspot to intercept client traffic and harvest credentials."
+  },
+  {
+    "id": "m3-12",
+    "category": "Selection Criteria & Future Trends",
+    "topic": "Software-Defined Networking & Wi-Fi 7",
+    "question": "What is the core architectural principle of Software-Defined Networking (SDN), and what key features define Wi-Fi 7 (802.11be)?",
+    "answer": "Software-Defined Networking (SDN) separates the control plane from the underlying data plane, utilizing centralized API orchestration to programmatically manage network behavior. Wi-Fi 7 (802.11be) introduces 320 MHz channel widths, 4096-QAM modulation, and Multi-Link Operation (MLO) for ultra-high throughput and low latency.",
+    "laymanExplanation": "SDN is like upgrading from manual train track switches operated by workers at every junction to a centralized computer command center that routes all trains globally via software commands. Wi-Fi 7 is like moving from a narrow multi-lane highway to a massive hyper-speed transit corridor that can transmit data across multiple radio bands simultaneously.",
+    "examTip": "SDN decoupling of the control plane from the data plane is a heavily tested concept. For Wi-Fi 7, remember its defining capabilities: 320 MHz channels and Multi-Link Operation (MLO)."
+  },
+  {
+    "id": "m3-13",
+    "category": "Copper Network Media",
+    "topic": "Crossover vs. Straight-Through Pinouts",
+    "question": "What is the primary difference in wire termination between a T568A and T568B straight-through cable versus a crossover cable?",
+    "answer": "A straight-through cable uses the same wiring standard (either T568A or T568B) on both RJ-45 ends to connect unlike devices (e.g., PC to switch). A crossover cable terminates one end with T568A and the other with T568B to connect like devices (e.g., switch to switch or router to router), though modern auto-MDIX ports render crossover cables largely obsolete.",
+    "laymanExplanation": "Think of a straight-through cable like matching lanes on a highway going straight across, while a crossover cable swaps the transmit and receive lanes so two devices can talk directly without a middleman switch.",
+    "examTip": "Auto-MDIX technology automatically detects the required cable pinout, so you rarely need manual crossover cables in modern enterprise environments, but CompTIA still tests the underlying T568A/B standard pinout logic."
+  },
+  {
+    "id": "m3-14",
+    "category": "Network Topologies",
+    "topic": "Spanning Tree Protocol (STP) Port States",
+    "question": "What are the standard Spanning Tree Protocol (STP) port states through which a switch port transitions to prevent Layer 2 switching loops?",
+    "answer": "In classic 802.1D Spanning Tree, ports transition through Blocking, Listening, Learning, and Forwarding states (with Disabled as an administrative state). Rapid Spanning Tree Protocol (RSTP / 802.1w) streamlines this into Discarding, Learning, and Forwarding to drastically reduce convergence times.",
+    "laymanExplanation": "Imagine a smart traffic intersection safety system: before green lights (Forwarding) are given out to avoid crashing cars (loops), the traffic system watches and learns road traffic patterns through cautious startup states.",
+    "examTip": "In a blocked STP state, a switch port listens for BDPUs (Bridge Protocol Data Units) to detect topology changes but does not forward user data frames, completely preventing Layer 2 broadcast loops."
+  },
+  {
+    "id": "m3-15",
+    "category": "Wireless Access Points & Wi-Fi Standards",
+    "topic": "Wi-Fi Frequency Bands & Non-Overlapping Channels",
+    "question": "What are the three primary non-overlapping channels in the 2.4 GHz Wi-Fi spectrum, and how do they differ from the 5 GHz band channel allocation?",
+    "answer": "In the 2.4 GHz band, channels 1, 6, and 11 are the only three non-overlapping 20 MHz channels available to prevent co-channel interference. In contrast, the 5 GHz band provides significantly more non-overlapping channels (up to 24 or more depending on regulatory domains), supporting much higher density deployments.",
+    "laymanExplanation": "Think of 2.4 GHz channels like a busy three-lane highway where everyone shares the road, so you must use spaced-out lanes (1, 6, 11) to avoid crashing. The 5 GHz band is a massive multi-lane superhighway with plenty of room so nobody crowds each other.",
+    "examTip": "Always remember 1, 6, and 11 for 2.4 GHz channel design questions on the exam; choosing adjacent channels like 1 and 2 causes severe signal degradation and interference."
+  }
+]

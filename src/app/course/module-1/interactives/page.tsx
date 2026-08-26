@@ -1,4 +1,4 @@
-import OsiDragAndDrop from '@/src/components/Interactives/Module1/OsiDragAndDrop';
+import OsiDragAndDrop from '@/components/Interactives/Module1/OsiDragAndDrop';
 
 export default function Module1InteractivesPage() {
   return (
