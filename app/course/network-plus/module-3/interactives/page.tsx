@@ -1,17 +1,14 @@
 "use client";
 import InteractiveViewer, { Simulation } from "@/components/InteractiveViewer";
+import SwitchMacLearningEngine from "@/components/Interactives/Module3/SwitchMacLearningEngine";
+
 
 export default function Module3InteractivesPage() {
   const simulations: Simulation[] = [
     {
       id: "media-connector",
       label: "01_CABLE_TERMINATOR",
-      component: (
-        <div className="h-96 w-full flex flex-col items-center justify-center border border-dashed border-[#00ff41]/30 p-8 text-[#00ff41]/70 font-mono text-center">
-          <p className="text-lg font-bold uppercase tracking-wider mb-2">[ SIMULATOR 01: MEDIA & CONNECTOR LAB ]</p>
-          <span className="text-xs text-gray-500">Awaiting component wiring for UTP/Fiber matching.</span>
-        </div>
-      ),
+      component: <SwitchMacLearningEngine/>,
     },
     {
       id: "topology-architect",

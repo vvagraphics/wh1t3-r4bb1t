@@ -1,0 +1,137 @@
+[
+  {
+    "id": "m4-01",
+    "category": "Physical Layer & Media",
+    "topic": "Coaxial Cable Construction & Connectors",
+    "question": "What are the primary internal components of a coaxial cable, and which connector types are standard for RG-6 and RG-59 cables?",
+    "answer": "Coaxial cable consists of a single central copper conductor, a dielectric insulator, a braided metal shield, and an outer plastic jacket. RG-6 commonly uses F-type screw-on connectors (standard for broadband cable and satellite), while RG-59 commonly terminates with twist-locking BNC connectors (used in legacy CCTV and baseband video).",
+    "laymanExplanation": "Think of coax like a heavily protected tunnel: a solid copper wire runs down the center carrying data, wrapped in thick foam insulation, wrapped again in metal mesh armor to block static, and finally sealed in plastic.",
+    "examTip": "CompTIA frequently tests coaxial connectors: remember F-type for standard ISP cable modems/TV drops and BNC (bayonet-style twist lock) for CCTV and older legacy network drops."
+  },
+  {
+    "id": "m4-02",
+    "category": "Physical Layer & Media",
+    "topic": "Fiber Optic Types: Single-Mode vs. Multi-Mode",
+    "question": "What are the core physical and functional differences between Single-Mode Fiber (SMF) and Multi-Mode Fiber (MMF)?",
+    "answer": "Single-Mode Fiber (SMF) features a narrow core (around 9 microns), utilizes laser light sources, supports long distances (multi-kilometer/WAN backbones), and typically uses a yellow jacket. Multi-Mode Fiber (MMF) has a larger core (50 to 62.5 microns), uses LED or VCSEL light sources, supports shorter distances (local data centers/LAN backbones), and typically uses an orange or aqua jacket.",
+    "laymanExplanation": "SMF is like a laser pointer aimed straight down an empty hallway without touching the walls (travels far without bouncing). MMF is like a flashlight shining down a mirrored hallway where light bounces off the walls from multiple angles (modal dispersion), blurring the signal over longer runs.",
+    "examTip": "Remember jacket colors and distances: Yellow = Single-mode (long distance, laser). Aqua/Orange = Multi-mode (short distance/campus, LED)."
+  },
+  {
+    "id": "m4-03",
+    "category": "Copper Network Media",
+    "topic": "High-Speed Ethernet: Cat7 vs. Cat8 Standards",
+    "question": "What are the bandwidth, speed, and distance specifications for Cat7 and Cat8 twisted-pair copper cabling?",
+    "answer": "Cat7 is fully shielded (S/FTP), operates at 600 MHz bandwidth, and supports up to 10 Gbps at 100 meters. Cat8 operates at 2000 MHz (2 GHz), is fully shielded, and supports 25 Gbps (25GBASE-T) and 40 Gbps (40GBASE-T) over short distances up to 30 meters, primarily used for data center rack-to-rack links.",
+    "laymanExplanation": "Cat7 is an armored highway that lets standard 10 Gbps traffic drive 100 meters without interference. Cat8 is an ultra-wide drag strip designed to handle 25–40 Gbps, but only for a quick 30-meter sprint between server racks.",
+    "examTip": "Cat8 max distance is strictly 30 meters, not 100 meters! It is standardized for data center top-of-rack/switch-to-server 25GBASE-T and 40GBASE-T links."
+  },
+  {
+    "id": "m4-04",
+    "category": "Structured Cabling & Safety",
+    "topic": "Plenum vs. PVC Cable Jackets",
+    "question": "Where must Plenum-rated (CMP) cabling be installed instead of standard Polyvinyl Chloride (PVC/CMR) cabling, and why?",
+    "answer": "Plenum-rated cabling must be installed in plenum spaces—areas used for environmental air handling and HVAC circulation, such as above drop ceilings or below raised floors. Plenum jackets use fire-resistant fluoropolymers that produce low flame and emit minimal toxic smoke when burned, unlike PVC which releases toxic hydrogen chloride gas.",
+    "laymanExplanation": "If a fire breaks out, standard PVC plastic burns quickly and fills the air conditioning ducts with poisonous black smoke. Plenum cable is fire-resistant and won't poison the air being circulated to people throughout the building.",
+    "examTip": "If an exam question mentions running cable through 'air ducts', 'drop ceilings used for return air', or 'raised floor air pathways', the correct answer is always Plenum (CMP) cabling."
+  },
+  {
+    "id": "m4-05",
+    "category": "Termination & Pinouts",
+    "topic": "T568A vs. T568B Color Codes & Wiring Schemes",
+    "question": "What is the structural pinout difference between TIA/EIA T568A and T568B, and which wire pairs are swapped?",
+    "answer": "T568A and T568B swap the positions of the Orange and Green wire pairs. In T568A, Pair 3 (Green/White, Green) occupies pins 1 and 2, while Pair 2 (Orange/White, Orange) occupies pins 3 and 6. In T568B, Pair 2 (Orange/White, Orange) occupies pins 1 and 2, while Pair 3 (Green/White, Green) occupies pins 3 and 6. Blue (pins 4, 5) and Brown (pins 7, 8) remain unchanged in both.",
+    "laymanExplanation": "Think 'A = Apple (Green first)' and 'B = Basketball (Orange first)'. The middle blue wires and outside brown wires stay in the exact same spots; only the green and orange wire pairs trade places.",
+    "examTip": "Memorize which pins swap: Pins 1 & 2 swap with Pins 3 & 6. A straight-through cable uses the same standard on both ends (e.g., B-to-B), while a crossover cable uses T568A on one end and T568B on the other."
+  },
+  {
+    "id": "m4-06",
+    "category": "Termination & Hardware",
+    "topic": "Punchdown Blocks: 66 vs. 110 Blocks",
+    "question": "What are the primary differences in use cases between 66 punchdown blocks and 110 punchdown blocks?",
+    "answer": "66 blocks are legacy punchdown blocks designed primarily for analog voice, telephone, and PBX distribution systems. 110 blocks are modern high-frequency punchdown blocks designed for structured Ethernet data cabling (Cat5e, Cat6, Cat6a) and are standard on the back of modern RJ-45 patch panels.",
+    "laymanExplanation": "66 blocks are the old wooden-post telephone switchboards of the past; 110 blocks are the sleek, modern connection hubs engineered to handle high-speed computer data without signal bleeding.",
+    "examTip": "CompTIA scenario rule: Analog telephone / voice = 66 block. High-speed Cat-rated structured Ethernet data / patch panels = 110 block (terminated using an impact punchdown tool)."
+  },
+  {
+    "id": "m4-07",
+    "category": "Cable Testing & Diagnostics",
+    "topic": "Continuity vs. Wiremap vs. Cable Certification",
+    "question": "What is the operational difference between a continuity test, a wiremap test, and a cable certification test?",
+    "answer": "A continuity tester verifies basic end-to-end electrical paths to detect opens and shorts. A wiremap tester checks individual pin-to-pin alignment (1 through 8) to detect miswires, reversed pairs, and split pairs. A cable certifier conducts rigorous electrical and physical qualification tests (NEXT, FEXT, return loss, attenuation, delay skew) to validate that a cable meets strict TIA/EIA performance category standards required for manufacturer warranties.",
+    "laymanExplanation": "Continuity checks if electricity flows; wiremapping checks if every colored wire hit the right pin slot; certification puts the cable through a comprehensive diagnostic stress test to guarantee it can actually hit top gigabit speeds without dropping data.",
+    "examTip": "A basic continuity tester CANNOT detect split pairs because the electrical circuit is still closed. You need a wiremapper or certifier to catch split pairs and NEXT issues."
+  },
+  {
+    "id": "m4-08",
+    "category": "Cable Impairments & Metrics",
+    "topic": "Crosstalk (NEXT/FEXT) & Return Loss",
+    "question": "How do Near-End Crosstalk (NEXT), Far-End Crosstalk (FEXT), and Return Loss affect copper Ethernet performance?",
+    "answer": "Crosstalk occurs when signals from one wire pair bleed electromagnetically into an adjacent pair. Near-End Crosstalk (NEXT) measures this interference at the transmitting end (where signal energy is strongest), while Far-End Crosstalk (FEXT) measures interference at the receiving end. Return Loss measures the amount of signal reflected backward toward the transmitter due to impedance mismatches, kinks, or damaged terminations.",
+    "laymanExplanation": "Crosstalk is hearing your coworker's call bleeding through the cubicle wall while you try to talk. Return loss is shouting down a hallway and having your own voice echo back at you because you hit a wall or obstacle.",
+    "examTip": "Crosstalk is prevented by maintaining tight pair twists right up to the termination point. Return loss is caused by physical cable damage, crushed jackets, or sharp bends."
+  },
+  {
+    "id": "m4-09",
+    "category": "Power over Ethernet (PoE)",
+    "topic": "PoE Standards: 802.3af vs. 802.3at vs. 802.3bt",
+    "question": "What are the maximum power delivery specifications for IEEE 802.3af (PoE), 802.3at (PoE+), and 802.3bt (PoE++)?",
+    "answer": "IEEE 802.3af (PoE) delivers up to 15.4 W from the PSE (Power Sourcing Equipment), supporting basic VoIP phones and simple cameras. IEEE 802.3at (PoE+) delivers up to 30 W, supporting PTZ cameras and dual-band WAPs. IEEE 802.3bt (PoE++ / 4PPoE) delivers 60 W (Type 3) to 100 W (Type 4), supporting digital signage, multi-sensor cameras, and smart building lighting.",
+    "laymanExplanation": "802.3af is a single standard outlet for small gear (15.4W); 802.3at is a boosted circuit for motorized devices like PTZ cameras (30W); 802.3bt is high-voltage heavy power across all 4 wire pairs for enterprise screens and lighting (up to 100W).",
+    "examTip": "Memorize the standards: af = 15.4W (Classes 0–3), at = 30W (Class 4), bt = 60W–100W (Classes 5–8). PSE provides the power; PD (Powered Device) consumes it."
+  },
+  {
+    "id": "m4-10",
+    "category": "Network Facilities & Topology",
+    "topic": "MDF vs. IDF & Structured Cabling Hierarchy",
+    "question": "What is the hierarchical relationship between a Main Distribution Frame (MDF) and an Intermediate Distribution Frame (IDF)?",
+    "answer": "An MDF is the primary central wiring facility in a building that houses core switches, main routers, servers, and the demarcation point connecting to external ISPs. IDFs are secondary wiring closets (typically distributed per floor or wing) that connect end-user access switches to wall jacks via horizontal copper cabling. IDFs connect back to the central MDF via high-speed vertical/backbone cabling (typically fiber optic).",
+    "laymanExplanation": "The MDF is the airport's main terminal where international flights (ISP) land and core routing happens. The IDFs are the individual departure gates on each concourse that handle local passengers before funneling them down the main hallway.",
+    "examTip": "Horizontal cabling = solid copper from IDF to user work area wall jack (max 100m channel). Backbone / Vertical cabling = links IDFs to the MDF (typically fiber)."
+  },
+  {
+    "id": "m4-11",
+    "category": "Data Center & Rack Installation",
+    "topic": "Thermal Management: Hot/Cold Aisles & Blanking Panels",
+    "question": "How do hot/cold aisle layouts and blanking panels maintain optimal server room thermal dynamics?",
+    "answer": "In a hot/cold aisle configuration, server racks are arranged with equipment fronts facing cold aisles (drawing chilled intake air from HVAC/perforated tiles) and equipment exhausts facing hot aisles (where hot exhaust air is isolated and vented away). Blanking panels (filler panels) cover empty rack units (U-spaces) to prevent hot exhaust air from looping back over the top/sides into the cold air intake.",
+    "laymanExplanation": "Servers pull cool air from the front and blow hot air out the back. Hot/cold aisles keep cool and hot airflow completely separated, while blanking panels block empty holes in the rack so hot air can't sneak back into the front intake fans.",
+    "examTip": "If a question mentions hot air recirculating or servers overheating in a half-filled rack, the fix is installing blanking/filler panels in the open U-spaces."
+  },
+  {
+    "id": "m4-12",
+    "category": "Power Planning & Electrical Safety",
+    "topic": "Server Room Power Calculations & The 80% Rule",
+    "question": "How is electrical load calculated using Ohm's Law, and how does the 80% continuous load rule apply to circuit sizing?",
+    "answer": "Current is calculated using the formula Amps = Watts / Volts. For continuous 24/7 server room loads, electrical safety standards mandate that total equipment draw must not exceed 80% of the circuit's rated capacity. Therefore, a 15 A circuit has a maximum safe continuous load of 12 A, and a 20 A circuit has a maximum safe continuous load of 16 A.",
+    "laymanExplanation": "To find amperage, divide the total wattage of your servers by your wall voltage (120V or 208V). Never fill a circuit to 100%—always leave 20% breathing room so wires don't overheat and trip the breaker when hardware spikes.",
+    "examTip": "Know the math: 15A x 0.80 = 12A max continuous load; 20A x 0.80 = 16A max continuous load. Also remember A/B power feeds provide redundancy by feeding dual server PSUs from separate electrical circuits/PDUs."
+  },
+  {
+    "id": "m4-13",
+    "category": "Power Systems & Redundancy",
+    "topic": "UPS Topologies: Standby vs. Line-Interactive vs. Online Double-Conversion",
+    "question": "What are the operational differences between Standby, Line-Interactive, and Online Double-Conversion UPS systems?",
+    "answer": "A Standby (offline) UPS powers equipment directly from utility power and switches to battery during an outage, causing a brief millisecond transfer time. A Line-Interactive UPS adds an automatic voltage regulation (AVR) transformer to smooth out minor sags and brownouts without depleting the battery. An Online Double-Conversion UPS continuously converts AC to DC and back to clean AC, isolating equipment from utility noise and offering zero transfer time during a power failure.",
+    "laymanExplanation": "Standby waits until power dies to kick in. Line-interactive adjusts minor power drops automatically without wasting battery. Double-conversion completely rebuilds the electricity 24/7 so servers never experience even a 1-millisecond power blip.",
+    "examTip": "For mission-critical data center server equipment requiring zero transfer time and total isolation from dirty power, choose Online Double-Conversion UPS."
+  },
+  {
+    "id": "m4-14",
+    "category": "Environmental Controls & Physical Installation",
+    "topic": "Data Center HVAC Ranges & Environmental Hazards",
+    "question": "What are the recommended ASHRAE temperature and humidity ranges for server rooms, and what hazards occur if levels fall out of spec?",
+    "answer": "The standard operational temperature range is 64°F to 80°F (18°C to 27°C) and relative humidity is 40% to 60%. Humidity below 40% significantly increases the risk of Electrostatic Discharge (ESD), which can destroy sensitive microchips. Humidity above 60% leads to condensation and moisture buildup, causing short circuits and corrosion. Excessive temperatures cause thermal throttling and hardware shutdowns.",
+    "laymanExplanation": "Server rooms need a Goldilocks climate: too dry (<40%) means static sparks fry chips; too humid (>60%) means water droplets condense on live motherboards; too hot (>80°F) cooks the processors.",
+    "examTip": "CompTIA scenario alert: Low humidity = Electrostatic Discharge (ESD) danger. High humidity = Condensation and corrosion danger."
+  },
+  {
+    "id": "m4-15",
+    "category": "Physical Installation & Best Practices",
+    "topic": "Cable Management, Bend Radius & Structural Safety",
+    "question": "What are the best practices for rack stability, cable fastening, and preserving cable bend radius?",
+    "answer": "Heavy equipment (such as UPS battery backups) must be installed at the bottom of the rack for center-of-gravity stability, and racks must be anchored to the floor or overhead ceiling trays. Hook-and-loop (Velcro) straps should be used instead of plastic zip ties to bundle cables without pinching or crushing internal twists. Cables must adhere to manufacturer minimum bend radius standards to prevent micro-fractures in fiber and high return loss / crosstalk in copper.",
+    "laymanExplanation": "Put the heavy batteries at the floor level so the rack doesn't tip over on you, bolt it down, use Velcro so you don't crush the wires with sharp plastic zip ties, and never bend network cables around sharp 90-degree corners.",
+    "examTip": "Avoid plastic zip ties on high-performance twisted pair and fiber because over-cinching changes cable geometry and degrades performance. Use hook-and-loop (Velcro) fasteners."
+  }
+]

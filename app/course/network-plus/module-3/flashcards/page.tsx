@@ -1,15 +1,13 @@
-"use client";
 import FlashcardViewer from "@/components/FlashcardViewer";
 import module3Cards from "@/data/network-plus/module3-cards.json";
 
-export default function Module3FlashcardsPage() {
+export default function Module3Flashcards() {
   return (
-    <FlashcardViewer
-      title="Sector 03 // Flashcards"
-      description="Test your recall on cabling standards, topologies, and network devices."
-      backLink="/course/network-plus/module-3"
-      backLabel="Return to Sector 03 Menu"
-      cards={module3Cards}
+    <FlashcardViewer 
+      cardsData={module3Cards} 
+      moduleTitle="MOD 03 // NETWORK MEDIA, TOPOLOGIES & DEVICES" 
+      returnHref="/course/network-plus/module-3"
+      storageKey="matrixHardCards_mod3"
     />
   );
 }
