@@ -3,12 +3,11 @@ import Link from "next/link";
 export default function NetworkPlusDashboard() {
   return (
     <div className="min-h-screen bg-black text-white font-mono p-6 sm:p-8 md:p-12 lg:p-16 max-w-6xl mx-auto flex flex-col justify-between select-none">
-      
       <div className="w-full">
         {/* Header Controls */}
         <div className="mb-12 flex flex-col items-start gap-4 border-b border-green-950 pb-6 pt-2">
-          <Link 
-            href="/course" 
+          <Link
+            href="/course"
             className="matrix-glow-btn text-xs md:text-sm font-bold px-4 py-2 uppercase tracking-widest flex items-center gap-2"
           >
             <span>&larr;</span>
@@ -34,10 +33,9 @@ export default function NetworkPlusDashboard() {
 
         {/* Module Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
           {/* Module 1 (Active) */}
-          <Link 
-            href="/course/network-plus/module-1" 
+          <Link
+            href="/course/network-plus/module-1"
             className="group relative block border border-white/20 bg-black/60 p-6 transition-all duration-150 hover:bg-[#00ff41]/5 hover:border-l-4 hover:border-l-[#00ff41] hover:pl-7 hover:shadow-[0_0_20px_rgba(0,255,65,0.25)]"
           >
             <div className="flex justify-between items-center mb-4">
@@ -61,8 +59,8 @@ export default function NetworkPlusDashboard() {
           </Link>
 
           {/* Module 2 (Active) */}
-          <Link 
-            href="/course/network-plus/module-2" 
+          <Link
+            href="/course/network-plus/module-2"
             className="group relative block border border-white/20 bg-black/60 p-6 transition-all duration-150 hover:bg-[#00ff41]/5 hover:border-l-4 hover:border-l-[#00ff41] hover:pl-7 hover:shadow-[0_0_20px_rgba(0,255,65,0.25)]"
           >
             <div className="flex justify-between items-center mb-4">
@@ -85,10 +83,58 @@ export default function NetworkPlusDashboard() {
             </div>
           </Link>
 
+          {/* Module 3 (Active) */}
+          <Link
+            href="/course/network-plus/module-3"
+            className="group relative block border border-white/20 bg-black/60 p-6 transition-all duration-150 hover:bg-[#00ff41]/5 hover:border-l-4 hover:border-l-[#00ff41] hover:pl-7 hover:shadow-[0_0_20px_rgba(0,255,65,0.25)]"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-xs text-gray-400 group-hover:text-green-500 tracking-widest font-semibold transition-colors">
+                SECTOR // 03
+              </span>
+              <span className="badge-red-online text-[10px] font-bold px-2 py-0.5 uppercase tracking-widest whitespace-nowrap">
+                ONLINE
+              </span>
+            </div>
+            <h2 className="text-2xl font-bold text-white group-hover:text-[#00ff41] transition-colors mb-3 tracking-wide">
+              Module 03
+            </h2>
+            <p className="text-gray-400 group-hover:text-green-300 text-xs md:text-sm leading-relaxed mb-6 transition-colors">
+              Network Media, Topologies & Devices
+            </p>
+            <div className="flex items-center gap-2 text-xs font-bold text-white group-hover:text-[#00ff41] group-hover:translate-x-1.5 transition-all">
+              <span>INITIALIZE</span>
+              <span>&rarr;</span>
+            </div>
+          </Link>
+
+          {/* Module 4 (Active) */}
+          <Link
+            href="/course/network-plus/module-4"
+            className="group relative block border border-white/20 bg-black/60 p-6 transition-all duration-150 hover:bg-[#00ff41]/5 hover:border-l-4 hover:border-l-[#00ff41] hover:pl-7 hover:shadow-[0_0_20px_rgba(0,255,65,0.25)]"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-xs text-gray-400 group-hover:text-green-500 tracking-widest font-semibold transition-colors">
+                SECTOR // 04
+              </span>
+              <span className="badge-red-online text-[10px] font-bold px-2 py-0.5 uppercase tracking-widest whitespace-nowrap">
+                ONLINE
+              </span>
+            </div>
+            <h2 className="text-2xl font-bold text-white group-hover:text-[#00ff41] transition-colors mb-3 tracking-wide">
+              Module 04
+            </h2>
+            <p className="text-gray-400 group-hover:text-green-300 text-xs md:text-sm leading-relaxed mb-6 transition-colors">
+              Physical Layer & Installation Considerations
+            </p>
+            <div className="flex items-center gap-2 text-xs font-bold text-white group-hover:text-[#00ff41] group-hover:translate-x-1.5 transition-all">
+              <span>INITIALIZE</span>
+              <span>&rarr;</span>
+            </div>
+          </Link>
+
           {/* Locked Modules Mapping */}
           {[
-            { id: "03", title: "Network Media, Topologies & Devices" },
-            { id: "04", title: "Physical Layer & Installation Considerations" },
             { id: "05", title: "Subnetting & Small Network Design" },
             { id: "06", title: "WLAN Concepts & Secure Configuration" },
             { id: "07", title: "Switching & Routing Implementations" },
@@ -117,7 +163,6 @@ export default function NetworkPlusDashboard() {
               </div>
             </div>
           ))}
-
         </div>
       </div>
 
